@@ -6,7 +6,18 @@
     <description>Recent content in Posts on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Apr 2022 16:04:12 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Apr 2022 13:52:37 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C Encapsulation and Opaque Types</title>
+      <link>https://www.mkbaltz.com/posts/c-encapsulation/</link>
+      <pubDate>Thu, 28 Apr 2022 13:52:37 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-encapsulation/</guid>
+      <description>Encapsulation in most languages is usually done by having a class with a private variable with public methods to access and modify its value.
+An Example Here&amp;rsquo;s an example in Java for illustrative purposes
+// simple example in Java public class Person {  // constructor  public Person() {}   // private variable accessible only inside the class  private int age;   // public methods to interact with its instance  public int getAge() {  return this.</description>
+    </item>
+    
     <item>
       <title>How to Recover Password from a Saved Connection in DBeaver</title>
       <link>https://www.mkbaltz.com/posts/how-to-recover-dbeaver-password/</link>
