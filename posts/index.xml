@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Kebino&#39;s Blog</title>
-    <link>https://kebino.github.io/posts/</link>
-    <description>Recent content in Posts on Kebino&#39;s Blog</description>
+    <title>Posts on mkbaltz</title>
+    <link>https://mkbaltz.com/posts/</link>
+    <description>Recent content in Posts on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Apr 2022 16:04:12 +0800</lastBuildDate><atom:link href="https://kebino.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Apr 2022 16:04:12 +0800</lastBuildDate><atom:link href="https://mkbaltz.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How to Recover Password from a Saved Connection in DBeaver</title>
-      <link>https://kebino.github.io/posts/how-to-recover-dbeaver-password/</link>
+      <link>https://mkbaltz.com/posts/how-to-recover-dbeaver-password/</link>
       <pubDate>Wed, 27 Apr 2022 16:04:12 +0800</pubDate>
       
-      <guid>https://kebino.github.io/posts/how-to-recover-dbeaver-password/</guid>
+      <guid>https://mkbaltz.com/posts/how-to-recover-dbeaver-password/</guid>
       <description>Requirements  OpenSSL is installed on your system OpenSSL is registered to PATH  TLDR; cd credentials_config_json_directory # change this to the directory where credentials-config.json is located on your system openssl aes-128-cbc -d -K babb4a9f774ab853c96c2d653dfe544a -iv 00000000000000000000000000000000 -in &amp;#34;credentials-config.json&amp;#34; Export DBeaver Project DBeaver stores an encrypted credentials of your saved connections in the a file named &amp;ldquo;credentials-config.json&amp;rdquo;.
 To get this file we need to:  In DBeaver, Go to File -&amp;gt; Export -&amp;gt; DBeaver -&amp;gt; Project Select an output directory Press Finish Go to output directory Rename output file and change extension to .</description>
     </item>

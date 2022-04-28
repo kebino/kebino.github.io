@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Kebino&#39;s Blog</title>
-    <link>https://kebino.github.io/categories/</link>
-    <description>Recent content in Categories on Kebino&#39;s Blog</description>
+    <title>Categories on mkbaltz</title>
+    <link>https://mkbaltz.com/categories/</link>
+    <description>Recent content in Categories on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://kebino.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://mkbaltz.com/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
