@@ -2,8 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.mkbaltz.com/about/</loc>
-  </url><url>
     <loc>https://www.mkbaltz.com/tags/c/</loc>
     <lastmod>2022-04-29T06:29:02+08:00</lastmod>
   </url><url>
@@ -30,6 +28,10 @@
   </url><url>
     <loc>https://www.mkbaltz.com/tags/misc/</loc>
     <lastmod>2022-04-27T16:04:12+08:00</lastmod>
+  </url><url>
+    <loc>https://www.mkbaltz.com/about/</loc>
+  </url><url>
+    <loc>https://www.mkbaltz.com/archives/</loc>
   </url><url>
     <loc>https://www.mkbaltz.com/categories/</loc>
   </url>
