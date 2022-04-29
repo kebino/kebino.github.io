@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>C How to Read the Entire Content of a Text File | mkbaltz</title>
-<meta name="keywords" content="programming, c">
+<meta name="keywords" content="c programming, read, how, file">
 <meta name="description" content="Most resources I found for reading files shows how to read a file line by line then display the output, but there are cases where you want to read the entire content of the file and store its contents in a variable for later use.
 #include &lt;stdio.h&gt;#include &lt;stdlib.h&gt; char* read_file(const char* path) {  // open the file  FILE* f = fopen(path, &#34;rb&#34;);   // determine the length of the file  fseek(f, 0, SEEK_END);  long length = ftell(f);  fseek(f, 0, SEEK_SET);   // allocate buffer to store the contents of the file  // size of the buffer should be the file length &#43; 1  // because we need to add a null terminator at the end  char* buffer = malloc((sizeof(char) * length) &#43; 1);   // read the file to our buffer  fread(buffer, sizeof(char), length, f);   // at this point file can be closed  fclose(f);   // add null terminator  buffer[length] = &#39;\0&#39;;   return buffer; }  int main(int argc, char* args[]) {  // read the file and store its contents to str variable  char* str = read_file(&#34;path_to_file.">
 <meta name="author" content="">
@@ -110,7 +110,7 @@ if (!doNotTrack) {
   "name": "C How to Read the Entire Content of a Text File",
   "description": "Most resources I found for reading files shows how to read a file line by line then display the output, but there are cases where you want to read the entire content of the file and store its contents in a variable for later use.\n#include \u0026lt;stdio.h\u0026gt;#include \u0026lt;stdlib.h\u0026gt; char* read_file(const char* path) {  // open the file  FILE* f = fopen(path, \u0026#34;rb\u0026#34;);   // determine the length of the file  fseek(f, 0, SEEK_END);  long length = ftell(f);  fseek(f, 0, SEEK_SET);   // allocate buffer to store the contents of the file  // size of the buffer should be the file length + 1  // because we need to add a null terminator at the end  char* buffer = malloc((sizeof(char) * length) + 1);   // read the file to our buffer  fread(buffer, sizeof(char), length, f);   // at this point file can be closed  fclose(f);   // add null terminator  buffer[length] = \u0026#39;\\0\u0026#39;;   return buffer; }  int main(int argc, char* args[]) {  // read the file and store its contents to str variable  char* str = read_file(\u0026#34;path_to_file.",
   "keywords": [
-    "programming", "c"
+    "c programming", "read", "how", "file"
   ],
   "articleBody": "Most resources I found for reading files shows how to read a file line by line then display the output, but there are cases where you want to read the entire content of the file and store its contents in a variable for later use.\n#include #include  char* read_file(const char* path) {  // open the file  FILE* f = fopen(path, \"rb\");   // determine the length of the file  fseek(f, 0, SEEK_END);  long length = ftell(f);  fseek(f, 0, SEEK_SET);   // allocate buffer to store the contents of the file  // size of the buffer should be the file length + 1  // because we need to add a null terminator at the end  char* buffer = malloc((sizeof(char) * length) + 1);   // read the file to our buffer  fread(buffer, sizeof(char), length, f);   // at this point file can be closed  fclose(f);   // add null terminator  buffer[length] = '\\0';   return buffer; }  int main(int argc, char* args[]) {  // read the file and store its contents to str variable  char* str = read_file(\"path_to_file.txt\");   // check if all contents are in str  printf(\"%s\\n\", str);   free(str);  return 0; } Hope this is useful to someone. Have a nice day!\n",
   "wordCount" : "196",
@@ -257,6 +257,11 @@ but there are cases where you want to read the entire content of the file and st
       <li><a href="https://www.mkbaltz.com/tags/c/">c</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://www.mkbaltz.com/posts/multiple-angular-app-nginx/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>How to Serve Multiple Angular App from a Single Nginx Server</span>
+  </a>
   <a class="next" href="https://www.mkbaltz.com/posts/c-encapsulation/">
     <span class="title">Next Page »</span>
     <br>

@@ -6,7 +6,19 @@
     <description>Recent content on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 29 Apr 2022 06:29:02 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Apr 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How to Serve Multiple Angular App from a Single Nginx Server</title>
+      <link>https://www.mkbaltz.com/posts/multiple-angular-app-nginx/</link>
+      <pubDate>Sat, 30 Apr 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/multiple-angular-app-nginx/</guid>
+      <description>You have 2 angular projects, let&amp;rsquo;s call them Site1 and Site2, and you want to deploy them both on your nginx server.
+Base url of Site1 will be:
+https://{your_website}/site1 And for Site2:
+https://{your_website}/site2 Step 1: Build your angular projects # Build command for Site1 ng build --configuration=production --base-href=https://www.mkbaltz.com/site1/ --deploy-url=https://www.mkbaltz.com/site1/  # Build command for Site 2 ng build --configuration=production --base-href=https://www.mkbaltz.com/site2/ --deploy-url=https://www.mkbaltz.com/site2/ The &amp;ndash;base-href and &amp;ndash;deploy-url values will be used by angular as reference for its routing and locating of assets once deployed.</description>
+    </item>
+    
     <item>
       <title>C How to Read the Entire Content of a Text File</title>
       <link>https://www.mkbaltz.com/posts/c-read-entire-text/</link>

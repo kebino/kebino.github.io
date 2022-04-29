@@ -157,6 +157,21 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>How to Serve Multiple Angular App from a Single Nginx Server
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>You have 2 angular projects, let’s call them Site1 and Site2, and you want to deploy them both on your nginx server.
+Base url of Site1 will be:
+https://{your_website}/site1 And for Site2:
+https://{your_website}/site2 Step 1: Build your angular projects # Build command for Site1 ng build --configuration=production --base-href=/site1/ --deploy-url=/site1/  # Build command for Site 2 ng build --configuration=production --base-href=/site2/ --deploy-url=/site2/ The –base-href and –deploy-url values will be used by angular as reference for its routing and locating of assets once deployed....</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-04-30 00:00:00 +0800 CST'>April 30, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to How to Serve Multiple Angular App from a Single Nginx Server" href="https://www.mkbaltz.com/posts/multiple-angular-app-nginx/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C How to Read the Entire Content of a Text File
     </h2>
   </header>

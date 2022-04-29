@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Tags | mkbaltz</title>
+<title>nginx | mkbaltz</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://www.mkbaltz.com/tags/">
+<link rel="canonical" href="https://www.mkbaltz.com/tags/nginx/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.b4e19c453811e60acfec1f00c15ac2be1c53f6ab90187e684358ce7faaf48bab.css" integrity="sha256-tOGcRTgR5grP7B8AwVrCvhxT9quQGH5oQ1jOf6r0i6s=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://www.mkbaltz.com/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://www.mkbaltz.com/favicon-16x16.png">
@@ -18,7 +18,7 @@
 <link rel="mask-icon" href="https://www.mkbaltz.com/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://www.mkbaltz.com/tags/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://www.mkbaltz.com/tags/nginx/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -66,13 +66,13 @@ if (!doNotTrack) {
 	gtag('config', 'G-P5BFMXCEB4', { 'anonymize_ip': false });
 }
 </script>
-<meta property="og:title" content="Tags" />
+<meta property="og:title" content="nginx" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.mkbaltz.com/tags/" />
+<meta property="og:url" content="https://www.mkbaltz.com/tags/nginx/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
+<meta name="twitter:title" content="nginx"/>
 <meta name="twitter:description" content=""/>
 
 </head>
@@ -129,34 +129,31 @@ if (!doNotTrack) {
             </li>
             <li>
                 <a href="https://www.mkbaltz.com/tags/" title="Tags">
-                    <span class="active">Tags</span>
+                    <span>Tags</span>
                 </a>
             </li>
         </ul>
     </nav>
 </header>
-<main class="main">
+<main class="main"> 
 <header class="page-header">
-    <h1>Tags</h1>
+  <h1>nginx</h1>
 </header>
 
-<ul class="terms-tags">
-    <li>
-        <a href="https://www.mkbaltz.com/tags/angular/">angular <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://www.mkbaltz.com/tags/c/">c <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://www.mkbaltz.com/tags/misc/">misc <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://www.mkbaltz.com/tags/nginx/">nginx <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://www.mkbaltz.com/tags/programming/">programming <sup><strong><sup>4</sup></strong></sup> </a>
-    </li>
-</ul>
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>How to Serve Multiple Angular App from a Single Nginx Server
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>You have 2 angular projects, let’s call them Site1 and Site2, and you want to deploy them both on your nginx server.
+Base url of Site1 will be:
+https://{your_website}/site1 And for Site2:
+https://{your_website}/site2 Step 1: Build your angular projects # Build command for Site1 ng build --configuration=production --base-href=/site1/ --deploy-url=/site1/  # Build command for Site 2 ng build --configuration=production --base-href=/site2/ --deploy-url=/site2/ The –base-href and –deploy-url values will be used by angular as reference for its routing and locating of assets once deployed....</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-04-30 00:00:00 +0800 CST'>April 30, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to How to Serve Multiple Angular App from a Single Nginx Server" href="https://www.mkbaltz.com/posts/multiple-angular-app-nginx/"></a>
+</article>
     </main>
     
 <footer class="footer">
