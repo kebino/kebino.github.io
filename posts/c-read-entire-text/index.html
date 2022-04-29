@@ -108,7 +108,7 @@ if (!doNotTrack) {
 #include &lt;stdio.h&gt;#include &lt;stdlib.h&gt; char* read_file(const char* path) {  // open the file  FILE* f = fopen(path, &#34;rb&#34;);   // determine the length of the file  fseek(f, 0, SEEK_END);  long length = ftell(f);  fseek(f, 0, SEEK_SET);   // allocate buffer to store the contents of the file  // size of the buffer should be the file length &#43; 1  // because we need to add a null terminator at the end  char* buffer = malloc((sizeof(char) * length) &#43; 1);   // read the file to our buffer  fread(buffer, sizeof(char), length, f);   // at this point file can be closed  fclose(f);   // add null terminator  buffer[length] = &#39;\0&#39;;   return buffer; }  int main(int argc, char* args[]) {  // read the file and store its contents to str variable  char* str = read_file(&#34;path_to_file."><meta itemprop="datePublished" content="2022-04-29T06:29:02+08:00" />
 <meta itemprop="dateModified" content="2022-04-29T06:29:02+08:00" />
 <meta itemprop="wordCount" content="196">
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="programming,c," />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="C How to Read the Entire Content of a Text File"/>
@@ -229,6 +229,14 @@ but there are cases where you want to read the entire content of the file and st
 </section>
 
   
+  
+  <footer class="post-tags">
+     
+    <a href="https://www.mkbaltz.com/tags/programming">programming</a>
+     
+    <a href="https://www.mkbaltz.com/tags/c">c</a>
+    
+  </footer>
   
 
   

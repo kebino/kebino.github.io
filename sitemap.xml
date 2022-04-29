@@ -4,6 +4,9 @@
   <url>
     <loc>https://www.mkbaltz.com/about/</loc>
   </url><url>
+    <loc>https://www.mkbaltz.com/tags/c/</loc>
+    <lastmod>2022-04-29T06:29:02+08:00</lastmod>
+  </url><url>
     <loc>https://www.mkbaltz.com/posts/c-read-entire-text/</loc>
     <lastmod>2022-04-29T06:29:02+08:00</lastmod>
   </url><url>
@@ -13,14 +16,21 @@
     <loc>https://www.mkbaltz.com/posts/</loc>
     <lastmod>2022-04-29T06:29:02+08:00</lastmod>
   </url><url>
+    <loc>https://www.mkbaltz.com/tags/programming/</loc>
+    <lastmod>2022-04-29T06:29:02+08:00</lastmod>
+  </url><url>
+    <loc>https://www.mkbaltz.com/tags/</loc>
+    <lastmod>2022-04-29T06:29:02+08:00</lastmod>
+  </url><url>
     <loc>https://www.mkbaltz.com/posts/c-encapsulation/</loc>
     <lastmod>2022-04-28T13:52:37+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/posts/how-to-recover-dbeaver-password/</loc>
     <lastmod>2022-04-27T16:04:12+08:00</lastmod>
   </url><url>
-    <loc>https://www.mkbaltz.com/categories/</loc>
+    <loc>https://www.mkbaltz.com/tags/misc/</loc>
+    <lastmod>2022-04-27T16:04:12+08:00</lastmod>
   </url><url>
-    <loc>https://www.mkbaltz.com/tags/</loc>
+    <loc>https://www.mkbaltz.com/categories/</loc>
   </url>
 </urlset>
