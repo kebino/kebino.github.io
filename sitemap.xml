@@ -2,29 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://www.mkbaltz.com/tags/c/</loc>
+    <lastmod>2022-05-01T00:00:08+08:00</lastmod>
+  </url><url>
+    <loc>https://www.mkbaltz.com/posts/c-map-function/</loc>
+    <lastmod>2022-05-01T00:00:08+08:00</lastmod>
+  </url><url>
+    <loc>https://www.mkbaltz.com/</loc>
+    <lastmod>2022-05-01T00:00:08+08:00</lastmod>
+  </url><url>
+    <loc>https://www.mkbaltz.com/posts/</loc>
+    <lastmod>2022-05-01T00:00:08+08:00</lastmod>
+  </url><url>
+    <loc>https://www.mkbaltz.com/tags/programming/</loc>
+    <lastmod>2022-05-01T00:00:08+08:00</lastmod>
+  </url><url>
+    <loc>https://www.mkbaltz.com/tags/</loc>
+    <lastmod>2022-05-01T00:00:08+08:00</lastmod>
+  </url><url>
     <loc>https://www.mkbaltz.com/tags/angular/</loc>
     <lastmod>2022-04-30T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/posts/multiple-angular-app-nginx/</loc>
     <lastmod>2022-04-30T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://www.mkbaltz.com/</loc>
-    <lastmod>2022-04-30T00:00:00+08:00</lastmod>
-  </url><url>
     <loc>https://www.mkbaltz.com/tags/nginx/</loc>
     <lastmod>2022-04-30T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.mkbaltz.com/posts/</loc>
-    <lastmod>2022-04-30T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.mkbaltz.com/tags/programming/</loc>
-    <lastmod>2022-04-30T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.mkbaltz.com/tags/</loc>
-    <lastmod>2022-04-30T00:00:00+08:00</lastmod>
-  </url><url>
-    <loc>https://www.mkbaltz.com/tags/c/</loc>
-    <lastmod>2022-04-29T06:29:02+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/posts/c-read-entire-text/</loc>
     <lastmod>2022-04-29T06:29:02+08:00</lastmod>

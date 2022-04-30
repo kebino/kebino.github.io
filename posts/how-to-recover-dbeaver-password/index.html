@@ -112,8 +112,8 @@ To get this file we need to:  In DBeaver, Go to File -&gt; Export -&gt; DBeaver 
   "keywords": [
     "programming", "password", "dbeaver", "recover"
   ],
-  "articleBody": "Requirements  OpenSSL is installed on your system OpenSSL is registered to PATH  TLDR; cd credentials_config_json_directory # change this to the directory where credentials-config.json is located on your system openssl aes-128-cbc -d -K babb4a9f774ab853c96c2d653dfe544a -iv 00000000000000000000000000000000 -in \"credentials-config.json\" Export DBeaver Project DBeaver stores an encrypted credentials of your saved connections in the a file named “credentials-config.json”.\nTo get this file we need to:  In DBeaver, Go to File - Export - DBeaver - Project Select an output directory Press Finish Go to output directory Rename output file and change extension to .zip Unzip it  credentials-config.json can be found on: directory_where_you_unzipped/projects/General/.dbeaver\nDecrypt credentials-config.json using OpenSSL First let’s go to the same directory as credentials-config.json\ncd directory_where_you_unzipped/projects/General/.dbeaver Then decrypt the file using OpenSSL\nopenssl aes-128-cbc -d -K babb4a9f774ab853c96c2d653dfe544a -iv 00000000000000000000000000000000 -in \"credentials-config.json\" It is also possible to find this file without exporting but since its location is different for each OS, I find this approach easier.\n",
-  "wordCount" : "153",
+  "articleBody": "Requirements  OpenSSL is installed on your system OpenSSL is registered to PATH  TLDR; cd credentials_config_json_directory # change this to the directory where credentials-config.json is located on your system openssl aes-128-cbc -d -K babb4a9f774ab853c96c2d653dfe544a -iv 00000000000000000000000000000000 -in \"credentials-config.json\" Export DBeaver Project DBeaver stores an encrypted credentials of your saved connections in the a file named “credentials-config.json”.\nTo get this file we need to:  In DBeaver, Go to File - Export - DBeaver - Project Select an output directory Press Finish Go to output directory Rename output file and change extension to .zip Unzip it  credentials-config.json can be found on: directory_where_you_unzipped/projects/General/.dbeaver\nDecrypt credentials-config.json using OpenSSL First let’s go to the same directory as credentials-config.json\ncd directory_where_you_unzipped/projects/General/.dbeaver Then decrypt the file using OpenSSL\nopenssl aes-128-cbc -d -K babb4a9f774ab853c96c2d653dfe544a -iv 00000000000000000000000000000000 -in \"credentials-config.json\" It is also possible to find this file without exporting but since its location is different for each OS, I find this approach easier.\n Like this post?\nFollow this blog on Twitter and stay updated!\n",
+  "wordCount" : "164",
   "inLanguage": "en",
   "datePublished": "2022-04-27T16:04:12+08:00",
   "dateModified": "2022-04-27T16:04:12+08:00",
@@ -231,6 +231,9 @@ To get this file we need to:  In DBeaver, Go to File -&gt; Export -&gt; DBeaver 
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>openssl aes-128-cbc -d -K babb4a9f774ab853c96c2d653dfe544a -iv <span style="color:#ae81ff">00000000000000000000000000000000</span> -in <span style="color:#e6db74">&#34;credentials-config.json&#34;</span>
 </span></span></code></pre></div><p>It is also possible to find this file without exporting but since its location is different for
 each OS, I find this approach easier.</p>
+<hr>
+<p>Like this post?<br>
+<a href="https://twitter.com/kebino11_">Follow</a> this blog on Twitter and stay updated!</p>
 
 
   </div>

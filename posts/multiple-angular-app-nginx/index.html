@@ -118,8 +118,8 @@ https://{your_website}/site2 Step 1: Build your angular projects # Build command
   "keywords": [
     "angular", "nginx", "programming", "server", "deployment"
   ],
-  "articleBody": "You have 2 angular projects, let’s call them Site1 and Site2, and you want to deploy them both on your nginx server.\nBase url of Site1 will be:\nhttps://{your_website}/site1 And for Site2:\nhttps://{your_website}/site2 Step 1: Build your angular projects # Build command for Site1 ng build --configuration=production --base-href=/site1/ --deploy-url=/site1/  # Build command for Site 2 ng build --configuration=production --base-href=/site2/ --deploy-url=/site2/ The –base-href and –deploy-url values will be used by angular as reference for its routing and locating of assets once deployed.\nStep 2: Create subfolders in /var/www/html/ On your server create two folders at /var/www/html/ named site1 and site2.\ncd /var/www/html sudo mkdir site1 sudo mkdir site2 Step 3: Copy dist contents Copy the contents of dist directory of Site1 and Site2 to your server’s /var/www/html/site1/ and /var/www/html/site2 respectively.\nStep 4: Configure Nginx On Ubuntu, the configuration file is in /etc/nginx/sites-available/\nLet’s edit the file\ncd /etc/nginx/sites-available/  # name of config file is default sudo vim default Add this to the configuration file\nserver {  listen 80;  server_name your_website.com;   ...   # Site1  location /site1 {  autoindex on;  alias /var/www/html/site1/;  try_files $uri $uri/ /site1/index.html;  }   # Site2  location /site2 {  autoindex on;  alias /var/www/html/site2/;  try_files $uri $uri/ /site2/index.html;  }   ... } Step 5: Restart Nginx sudo service nginx restart You can now access site1 and site2 from their respective urls.\nIf you need to add more sites the process is the same.\n Thanks for reading and have a nice day!\n",
-  "wordCount" : "239",
+  "articleBody": "You have 2 angular projects, let’s call them Site1 and Site2, and you want to deploy them both on your nginx server.\nBase url of Site1 will be:\nhttps://{your_website}/site1 And for Site2:\nhttps://{your_website}/site2 Step 1: Build your angular projects # Build command for Site1 ng build --configuration=production --base-href=/site1/ --deploy-url=/site1/  # Build command for Site 2 ng build --configuration=production --base-href=/site2/ --deploy-url=/site2/ The –base-href and –deploy-url values will be used by angular as reference for its routing and locating of assets once deployed.\nStep 2: Create subfolders in /var/www/html/ On your server create two folders at /var/www/html/ named site1 and site2.\ncd /var/www/html sudo mkdir site1 sudo mkdir site2 Step 3: Copy dist contents Copy the contents of dist directory of Site1 and Site2 to your server’s /var/www/html/site1/ and /var/www/html/site2 respectively.\nStep 4: Configure Nginx On Ubuntu, the configuration file is in /etc/nginx/sites-available/\nLet’s edit the file\ncd /etc/nginx/sites-available/  # name of config file is default sudo vim default Add this to the configuration file\nserver {  listen 80;  server_name your_website.com;   ...   # Site1  location /site1 {  autoindex on;  alias /var/www/html/site1/;  try_files $uri $uri/ /site1/index.html;  }   # Site2  location /site2 {  autoindex on;  alias /var/www/html/site2/;  try_files $uri $uri/ /site2/index.html;  }   ... } Step 5: Restart Nginx sudo service nginx restart You can now access site1 and site2 from their respective urls.\nIf you need to add more sites the process is the same.\n Thanks for reading and have a nice day!\nLike this post?\nFollow this blog on Twitter and stay updated!\n",
+  "wordCount" : "250",
   "inLanguage": "en",
   "datePublished": "2022-04-30T00:00:00+08:00",
   "dateModified": "2022-04-30T00:00:00+08:00",
@@ -267,6 +267,8 @@ its routing and locating of assets once deployed.</p>
 <p>If you need to add more sites the process is the same.</p>
 <hr>
 <p>Thanks for reading and have a nice day!</p>
+<p>Like this post?<br>
+<a href="https://twitter.com/kebino11_">Follow</a> this blog on Twitter and stay updated!</p>
 
 
   </div>
@@ -278,6 +280,11 @@ its routing and locating of assets once deployed.</p>
       <li><a href="https://www.mkbaltz.com/tags/nginx/">nginx</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://www.mkbaltz.com/posts/c-map-function/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>C - Let&#39;s Make a Map Function</span>
+  </a>
   <a class="next" href="https://www.mkbaltz.com/posts/c-read-entire-text/">
     <span class="title">Next Page »</span>
     <br>

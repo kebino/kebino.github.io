@@ -6,7 +6,17 @@
     <description>Recent content in programming on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Apr 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 May 2022 00:00:08 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C - Let&#39;s Make a Map Function</title>
+      <link>https://www.mkbaltz.com/posts/c-map-function/</link>
+      <pubDate>Sun, 01 May 2022 00:00:08 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-map-function/</guid>
+      <description>If you&amp;rsquo;re a web developer and is currently learning C, you might haved missed working with javascript&amp;rsquo;s array functions like map, foreach, filter and others. So today let&amp;rsquo;s make one of those functions in C.
+Map Function The map function takes an array and a callback function as parameter. It iterates through all of the items of the array and process each one using the callback function then returns a new array with the updated values.</description>
+    </item>
+    
     <item>
       <title>How to Serve Multiple Angular App from a Single Nginx Server</title>
       <link>https://www.mkbaltz.com/posts/multiple-angular-app-nginx/</link>
