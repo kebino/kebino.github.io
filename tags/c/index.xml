@@ -6,7 +6,18 @@
     <description>Recent content in c on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 May 2022 00:00:08 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C - Let&#39;s Make a Foreach Function</title>
+      <link>https://www.mkbaltz.com/posts/c-foreach-function/</link>
+      <pubDate>Mon, 02 May 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-foreach-function/</guid>
+      <description>In my previous post we created a map function in C. Now let&amp;rsquo;s make the forEach function.
+Foreach Function The forEach function, similar to map, takes an array and a callback function as a parameter. It also iterates through all of the items of the array and process each one using the callback function.
+The main difference between the two functions is that forEach can modify the values inside the given array unlike map which returns a new array with the updated values and preserves the original.</description>
+    </item>
+    
     <item>
       <title>C - Let&#39;s Make a Map Function</title>
       <link>https://www.mkbaltz.com/posts/c-map-function/</link>
