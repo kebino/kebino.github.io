@@ -6,7 +6,18 @@
     <description>Recent content in programming on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Strings in C</title>
+      <link>https://www.mkbaltz.com/posts/c-strings/</link>
+      <pubDate>Tue, 03 May 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-strings/</guid>
+      <description>In C, a string is an array of characters ending with a null terminator &amp;rsquo;\0&amp;rsquo;. If you are coming from a different programming language here&amp;rsquo;s what you need to know to start working with strings.
+Declaration and Initialization Let&amp;rsquo;s start by looking at different ways to declare and initialize a string.
+As stated earlier it is an array of characters ending with a null terminator. Here&amp;rsquo;s how it looks like.</description>
+    </item>
+    
     <item>
       <title>C - Let&#39;s Make a Foreach Function</title>
       <link>https://www.mkbaltz.com/posts/c-foreach-function/</link>
