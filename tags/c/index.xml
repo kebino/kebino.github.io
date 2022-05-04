@@ -6,7 +6,19 @@
     <description>Recent content in c on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C - SQLite</title>
+      <link>https://www.mkbaltz.com/posts/c-sqlite/</link>
+      <pubDate>Thu, 05 May 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-sqlite/</guid>
+      <description>Working with SQLite usually invloves the following steps:
+ Open database Execute SQL statements Close database  Opening a Database To open a new database connection is done by calling the sqlite3_open.
+This function takes two arguments:
+ First argument is the file name of the database. If database file does not exist, it will be created. Second argument is a database handle  It returns an int value defined as SQLITE_OK if successful.</description>
+    </item>
+    
     <item>
       <title>C - How to Convert Numbers to String and String to Numbers</title>
       <link>https://www.mkbaltz.com/posts/c-convert-number-to-string/</link>
