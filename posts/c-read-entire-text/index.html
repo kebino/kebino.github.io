@@ -112,7 +112,7 @@ if (!doNotTrack) {
   "keywords": [
     "c programming", "read", "how", "file"
   ],
-  "articleBody": "Most resources I found for reading files shows how to read a file line by line then display the output, but there are cases where you want to read the entire content of the file and store its contents in a variable for later use.\n#include #include  char* read_file(const char* path) {  // open the file  FILE* f = fopen(path, \"rb\");   // determine the length of the file  fseek(f, 0, SEEK_END);  long length = ftell(f);  fseek(f, 0, SEEK_SET);   // allocate buffer to store the contents of the file  // size of the buffer should be the file length + 1  // because we need to add a null terminator at the end  char* buffer = malloc((sizeof(char) * length) + 1);   // read the file to our buffer  fread(buffer, sizeof(char), length, f);   // at this point file can be closed  fclose(f);   // add null terminator  buffer[length] = '\\0';   return buffer; }  int main(int argc, char* args[]) {  // read the file and store its contents to str variable  char* str = read_file(\"path_to_file.txt\");   // check if all contents are in str  printf(\"%s\\n\", str);   free(str);  return 0; } Hope this is useful to someone. Have a nice day!\nLike this post?\nFollow this blog on Twitter and stay updated!\n",
+  "articleBody": "Most resources I found for reading files shows how to read a file line by line then display the output, but there are cases where you want to read the entire content of the file and store its contents in a variable for later use.\n#include #include  char* read_file(const char* path) {  // open the file  FILE* f = fopen(path, \"rb\");   // determine the length of the file  fseek(f, 0, SEEK_END);  long length = ftell(f);  fseek(f, 0, SEEK_SET);   // allocate buffer to store the contents of the file  // size of the buffer should be the file length + 1  // because we need to add a null terminator at the end  char* buffer = malloc((sizeof(char) * length) + 1);   // read the file to our buffer  fread(buffer, sizeof(char), length, f);   // at this point file can be closed  fclose(f);   // add null terminator  buffer[length] = '\\0';   return buffer; }  int main(int argc, char* args[]) {  // read the file and store its contents to str variable  char* str = read_file(\"path_to_file.txt\");   // check if all contents are in str  printf(\"%s\\n\", str);   free(str);  return 0; } Hope this is useful to someone. Have a nice day!\n Like this post? \nFollow this blog on Twitter and stay updated!\n",
   "wordCount" : "207",
   "inLanguage": "en",
   "datePublished": "2022-04-29T06:29:02+08:00",
@@ -247,8 +247,10 @@ but there are cases where you want to read the entire content of the file and st
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>Hope this is useful to someone. Have a nice day!</p>
-<p>Like this post?<br>
-<a href="https://twitter.com/kebino11_">Follow</a> this blog on Twitter and stay updated!</p>
+<hr>
+<p>Like this post? <a href="https://ko-fi.com/K3K7CIMN0"><img loading="lazy" src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"  />
+</a></p>
+<p><a href="https://twitter.com/kebino11_">Follow</a> this blog on Twitter and stay updated!</p>
 
 
   </div>
