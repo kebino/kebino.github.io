@@ -6,7 +6,20 @@
     <description>Recent content in Posts on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 06 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C - Dynamic Array</title>
+      <link>https://www.mkbaltz.com/posts/c-dynamic-array/</link>
+      <pubDate>Fri, 06 May 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-dynamic-array/</guid>
+      <description>C does not have a built-in dynamic array like a vector in cpp or arraylist in java. Let&amp;rsquo;s try to implement something similar to that.
+Dynamic Array Our dynamic array must be able to resize automatically and hold any data type.
+Here&amp;rsquo;s the header file.
+array.h
+#ifndef array_h #define array_h  typedef struct array array; // array handle  array* array_create(); // constructor void array_destroy(array** arr); // destructor void* array_at(array* arr, int index); // get item at given index void array_append(array* arr, void* data); // insert data void* array_remove(array* arr, int index); // remove data at the specified index int array_get_count(array* arr); // get item count  #endif Our array struct is an opaque type, meaning the user of our array can only interact with it through the functions defined in our header.</description>
+    </item>
+    
     <item>
       <title>C - SQLite</title>
       <link>https://www.mkbaltz.com/posts/c-sqlite/</link>
