@@ -6,7 +6,23 @@
     <description>Recent content in c on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C - How to Read JSON Using Jansson</title>
+      <link>https://www.mkbaltz.com/posts/c-read-json-jansson/</link>
+      <pubDate>Sat, 07 May 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-read-json-jansson/</guid>
+      <description>Getting jansson Windows - MSYS2 mingw64
+pacman -S mingw-w64-x86_64-jansson Ubuntu
+sudo apt install libjansson-dev Github
+https://github.com/akheron/jansson
+Overview Parsing json with jansson involves the following steps:
+ Load the json string Traverse the json structure Get values Release loaded json  The following sections will go in detail on how to do each step.
+How to Read JSON JSON data in jansson is represented by json_t.
+json_t // representation of json object To read a json string, first we need to load it using the json_loads function.</description>
+    </item>
+    
     <item>
       <title>C - Dynamic Array</title>
       <link>https://www.mkbaltz.com/posts/c-dynamic-array/</link>
