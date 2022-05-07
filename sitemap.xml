@@ -3,21 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.mkbaltz.com/tags/c/</loc>
-    <lastmod>2022-05-07T00:00:00+08:00</lastmod>
+    <lastmod>2022-05-08T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://www.mkbaltz.com/posts/c-read-json-jansson/</loc>
-    <lastmod>2022-05-07T00:00:00+08:00</lastmod>
+    <loc>https://www.mkbaltz.com/posts/c-http-req-curl/</loc>
+    <lastmod>2022-05-08T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/</loc>
-    <lastmod>2022-05-07T00:00:00+08:00</lastmod>
+    <lastmod>2022-05-08T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/posts/</loc>
-    <lastmod>2022-05-07T00:00:00+08:00</lastmod>
+    <lastmod>2022-05-08T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/tags/programming/</loc>
-    <lastmod>2022-05-07T00:00:00+08:00</lastmod>
+    <lastmod>2022-05-08T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/tags/</loc>
+    <lastmod>2022-05-08T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.mkbaltz.com/posts/c-read-json-jansson/</loc>
     <lastmod>2022-05-07T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/posts/c-dynamic-array/</loc>

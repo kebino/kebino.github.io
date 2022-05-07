@@ -6,7 +6,22 @@
     <description>Recent content in programming on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C - How to Make HTTP Requests Using libcurl</title>
+      <link>https://www.mkbaltz.com/posts/c-http-req-curl/</link>
+      <pubDate>Sun, 08 May 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-http-req-curl/</guid>
+      <description>Getting libcurl Windows - MSYS2 mingw64
+pacman -S mingw-w64-x86_64-curl-winssl Ubuntu
+sudo apt install libcurl4-openssl-dev Github:
+https://github.com/curl/curl
+Overview Making HTTP requests with curl involves the following steps:
+ Create a curl handle. Create a list of headers. Create a callback function to handle response. Set request options. Execute the request. Free memory used by curl.  The following sections will go in detail for each of the steps.
+Making an HTTP Request Create a curl handle Curl handle is created by using curl_easy_init.</description>
+    </item>
+    
     <item>
       <title>C - How to Read JSON Using Jansson</title>
       <link>https://www.mkbaltz.com/posts/c-read-json-jansson/</link>
