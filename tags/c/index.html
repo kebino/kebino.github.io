@@ -142,6 +142,23 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C - How to Open File Dialog on Windows and Linux Using the sfd Library
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Getting sfd Github repository:
+https://github.com/rxi/sfd
+Overview Sfd is an easy to use library to open a file dialog. To use it, just drop sfd.c and sfd.h in your project.
+Note that on windows you must compile it with comdlg32.
+# compiling for windows gcc your-project.c sfd.c -lcomdlg32  # compiling for linux gcc your-project.c sfd.c Using sfd involves the following steps:
+ Set values of sfd_Options. Call either one of sfd_open_dialog or sfd_save_dialog....</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-05-09 15:37:55 +0800 CST'>May 9, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to C - How to Open File Dialog on Windows and Linux Using the sfd Library" href="https://www.mkbaltz.com/posts/c-open-dialog-with-sfd/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C - How to Make HTTP Requests Using libcurl
     </h2>
   </header>
@@ -275,20 +292,11 @@ Map Function The map function takes an array and a callback function as paramete
   <footer class="entry-footer"><span title='2022-04-29 06:29:02 +0800 CST'>April 29, 2022</span></footer>
   <a class="entry-link" aria-label="post link to C How to Read the Entire Content of a Text File" href="https://www.mkbaltz.com/posts/c-read-entire-text/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C Encapsulation and Opaque Types
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Encapsulation in most languages is usually done by having a class with a private variable with public methods to access and modify its value.
-An Example Here’s an example in Java for illustrative purposes
-// simple example in Java public class Person {  // constructor  public Person() {}   // private variable accessible only inside the class  private int age;   // public methods to interact with its instance  public int getAge() {  return this....</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-04-28 13:52:37 +0800 CST'>April 28, 2022</span></footer>
-  <a class="entry-link" aria-label="post link to C Encapsulation and Opaque Types" href="https://www.mkbaltz.com/posts/c-encapsulation/"></a>
-</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://www.mkbaltz.com/tags/c/page/2/">Next Page »</a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

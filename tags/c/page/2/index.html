@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head>
-	<meta name="generator" content="Hugo 0.97.3" /><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>mkbaltz</title>
-
+<title>c | mkbaltz</title>
+<meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="canonical" href="https://www.mkbaltz.com/">
+<link rel="canonical" href="https://www.mkbaltz.com/tags/c/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.b4e19c453811e60acfec1f00c15ac2be1c53f6ab90187e684358ce7faaf48bab.css" integrity="sha256-tOGcRTgR5grP7B8AwVrCvhxT9quQGH5oQ1jOf6r0i6s=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://www.mkbaltz.com/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://www.mkbaltz.com/favicon-16x16.png">
@@ -19,7 +18,7 @@
 <link rel="mask-icon" href="https://www.mkbaltz.com/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://www.mkbaltz.com/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://www.mkbaltz.com/tags/c/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -67,28 +66,15 @@ if (!doNotTrack) {
 	gtag('config', 'G-P5BFMXCEB4', { 'anonymize_ip': false });
 }
 </script>
-<meta property="og:title" content="mkbaltz" />
+<meta property="og:title" content="c" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.mkbaltz.com/" />
+<meta property="og:url" content="https://www.mkbaltz.com/tags/c/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="mkbaltz"/>
+<meta name="twitter:title" content="c"/>
 <meta name="twitter:description" content=""/>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "mkbaltz",
-  "url": "https://www.mkbaltz.com/",
-  "description": "",
-  "thumbnailUrl": "https://www.mkbaltz.com/favicon.ico",
-  "sameAs": [
-      "https://twitter.com/kebino11_", "https://mastodon.social/@mkbaltz", "https://kebino11.itch.io/", "https://ko-fi.com/mkbaltz"
-  ]
-}
-</script>
 </head>
 
 <body class="list" id="top">
@@ -150,21 +136,11 @@ if (!doNotTrack) {
     </nav>
 </header>
 <main class="main"> 
+<header class="page-header">
+  <h1>c</h1>
+</header>
 
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C How to Read the Entire Content of a Text File
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Most resources I found for reading files shows how to read a file line by line then display the output, but there are cases where you want to read the entire content of the file and store its contents in a variable for later use.
-#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt; char* read_file(const char* path) {  // open the file  FILE* f = fopen(path, &#34;rb&#34;);   // determine the length of the file  fseek(f, 0, SEEK_END);  long length = ftell(f);  fseek(f, 0, SEEK_SET);   // allocate buffer to store the contents of the file  // size of the buffer should be the file length &#43; 1  // because we need to add a null terminator at the end  char* buffer = malloc((sizeof(char) * length) &#43; 1);   // read the file to our buffer  fread(buffer, sizeof(char), length, f);   // at this point file can be closed  fclose(f);   // add null terminator  buffer[length] = &#39;\0&#39;;   return buffer; }  int main(int argc, char* args[]) {  // read the file and store its contents to str variable  char* str = read_file(&#34;path_to_file....</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-04-29 06:29:02 +0800 CST'>April 29, 2022</span></footer>
-  <a class="entry-link" aria-label="post link to C How to Read the Entire Content of a Text File" href="https://www.mkbaltz.com/posts/c-read-entire-text/"></a>
-</article>
-
-<article class="post-entry"> 
+<article class="post-entry tag-entry"> 
   <header class="entry-header">
     <h2>C Encapsulation and Opaque Types
     </h2>
@@ -177,22 +153,9 @@ An Example Here’s an example in Java for illustrative purposes
   <footer class="entry-footer"><span title='2022-04-28 13:52:37 +0800 CST'>April 28, 2022</span></footer>
   <a class="entry-link" aria-label="post link to C Encapsulation and Opaque Types" href="https://www.mkbaltz.com/posts/c-encapsulation/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>How to Recover Password from a Saved Connection in DBeaver
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Requirements  OpenSSL is installed on your system OpenSSL is registered to PATH  TLDR; cd credentials_config_json_directory # change this to the directory where credentials-config.json is located on your system openssl aes-128-cbc -d -K babb4a9f774ab853c96c2d653dfe544a -iv 00000000000000000000000000000000 -in &#34;credentials-config.json&#34; Export DBeaver Project DBeaver stores an encrypted credentials of your saved connections in the a file named “credentials-config.json”.
-To get this file we need to:  In DBeaver, Go to File -&gt; Export -&gt; DBeaver -&gt; Project Select an output directory Press Finish Go to output directory Rename output file and change extension to ....</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-04-27 16:04:12 +0800 CST'>April 27, 2022</span></footer>
-  <a class="entry-link" aria-label="post link to How to Recover Password from a Saved Connection in DBeaver" href="https://www.mkbaltz.com/posts/how-to-recover-dbeaver-password/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="prev" href="https://www.mkbaltz.com/">« Prev Page</a>
+    <a class="prev" href="https://www.mkbaltz.com/tags/c/">« Prev Page</a>
   </nav>
 </footer>
     </main>
