@@ -6,7 +6,21 @@
     <description>Recent content in programming on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 09 May 2022 15:37:55 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 May 2022 10:27:47 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C - How to Create a Zip Archive Using Miniz</title>
+      <link>https://www.mkbaltz.com/posts/c-how-to-create-zip-miniz/</link>
+      <pubDate>Tue, 10 May 2022 10:27:47 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-how-to-create-zip-miniz/</guid>
+      <description>Getting Miniz Github:
+https://github.com/richgel999/miniz/releases
+Overview Miniz is an easy to use c compression library. To use it, just drop miniz.c and miniz.h in your project.
+Creating a zip archive with miniz is done with mz_zip_add_mem_to_archive_file_in_place.
+mz_bool mz_zip_add_mem_to_archive_file_in_place(const char *pZip_filename,  const char *pArchive_name,  const void *pBuf,  size_t buf_size,  const void *pComment,  mz_uint16 comment_size,  mz_uint level_and_flags); It takes 7 arguments:
+ The archive&amp;rsquo;s file name. File name of the file to be appended to archive The file data Size of the file data String for comment.</description>
+    </item>
+    
     <item>
       <title>C - How to Open File Dialog on Windows and Linux Using the sfd Library</title>
       <link>https://www.mkbaltz.com/posts/c-open-dialog-with-sfd/</link>

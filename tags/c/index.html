@@ -142,6 +142,23 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C - How to Create a Zip Archive Using Miniz
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Getting Miniz Github:
+https://github.com/richgel999/miniz/releases
+Overview Miniz is an easy to use c compression library. To use it, just drop miniz.c and miniz.h in your project.
+Creating a zip archive with miniz is done with mz_zip_add_mem_to_archive_file_in_place.
+mz_bool mz_zip_add_mem_to_archive_file_in_place(const char *pZip_filename,  const char *pArchive_name,  const void *pBuf,  size_t buf_size,  const void *pComment,  mz_uint16 comment_size,  mz_uint level_and_flags); It takes 7 arguments:
+ The archive’s file name. File name of the file to be appended to archive The file data Size of the file data String for comment....</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-05-10 10:27:47 +0800 CST'>May 10, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to C - How to Create a Zip Archive Using Miniz" href="https://www.mkbaltz.com/posts/c-how-to-create-zip-miniz/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C - How to Open File Dialog on Windows and Linux Using the sfd Library
     </h2>
   </header>
@@ -278,19 +295,6 @@ Map Function The map function takes an array and a callback function as paramete
   </div>
   <footer class="entry-footer"><span title='2022-05-01 00:00:08 +0800 CST'>May 1, 2022</span></footer>
   <a class="entry-link" aria-label="post link to C - Let&#39;s Make a Map Function" href="https://www.mkbaltz.com/posts/c-map-function/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C How to Read the Entire Content of a Text File
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Most resources I found for reading files shows how to read a file line by line then display the output, but there are cases where you want to read the entire content of the file and store its contents in a variable for later use.
-#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt; char* read_file(const char* path) {  // open the file  FILE* f = fopen(path, &#34;rb&#34;);   // determine the length of the file  fseek(f, 0, SEEK_END);  long length = ftell(f);  fseek(f, 0, SEEK_SET);   // allocate buffer to store the contents of the file  // size of the buffer should be the file length &#43; 1  // because we need to add a null terminator at the end  char* buffer = malloc((sizeof(char) * length) &#43; 1);   // read the file to our buffer  fread(buffer, sizeof(char), length, f);   // at this point file can be closed  fclose(f);   // add null terminator  buffer[length] = &#39;\0&#39;;   return buffer; }  int main(int argc, char* args[]) {  // read the file and store its contents to str variable  char* str = read_file(&#34;path_to_file....</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-04-29 06:29:02 +0800 CST'>April 29, 2022</span></footer>
-  <a class="entry-link" aria-label="post link to C How to Read the Entire Content of a Text File" href="https://www.mkbaltz.com/posts/c-read-entire-text/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

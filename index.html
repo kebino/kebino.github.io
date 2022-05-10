@@ -199,6 +199,23 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C - How to Create a Zip Archive Using Miniz
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Getting Miniz Github:
+https://github.com/richgel999/miniz/releases
+Overview Miniz is an easy to use c compression library. To use it, just drop miniz.c and miniz.h in your project.
+Creating a zip archive with miniz is done with mz_zip_add_mem_to_archive_file_in_place.
+mz_bool mz_zip_add_mem_to_archive_file_in_place(const char *pZip_filename,  const char *pArchive_name,  const void *pBuf,  size_t buf_size,  const void *pComment,  mz_uint16 comment_size,  mz_uint level_and_flags); It takes 7 arguments:
+ The archive’s file name. File name of the file to be appended to archive The file data Size of the file data String for comment....</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-05-10 10:27:47 +0800 CST'>May 10, 2022</span></footer>
+  <a class="entry-link" aria-label="post link to C - How to Create a Zip Archive Using Miniz" href="https://www.mkbaltz.com/posts/c-how-to-create-zip-miniz/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C - How to Open File Dialog on Windows and Linux Using the sfd Library
     </h2>
   </header>
@@ -335,21 +352,6 @@ Map Function The map function takes an array and a callback function as paramete
   </div>
   <footer class="entry-footer"><span title='2022-05-01 00:00:08 +0800 CST'>May 1, 2022</span></footer>
   <a class="entry-link" aria-label="post link to C - Let&#39;s Make a Map Function" href="https://www.mkbaltz.com/posts/c-map-function/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>How to Serve Multiple Angular App from a Single Nginx Server
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>You have 2 angular projects, let’s call them Site1 and Site2, and you want to deploy them both on your nginx server.
-Base url of Site1 will be:
-https://{your_website}/site1 And for Site2:
-https://{your_website}/site2 Step 1: Build your angular projects # Build command for Site1 ng build --configuration=production --base-href=/site1/ --deploy-url=/site1/  # Build command for Site 2 ng build --configuration=production --base-href=/site2/ --deploy-url=/site2/ The –base-href and –deploy-url values will be used by angular as reference for its routing and locating of assets once deployed....</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-04-30 00:00:00 +0800 CST'>April 30, 2022</span></footer>
-  <a class="entry-link" aria-label="post link to How to Serve Multiple Angular App from a Single Nginx Server" href="https://www.mkbaltz.com/posts/multiple-angular-app-nginx/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
