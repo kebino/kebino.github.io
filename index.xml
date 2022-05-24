@@ -6,7 +6,22 @@
     <description>Recent content on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 May 2022 10:27:47 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SDL2 Tutorial in C [01] - Creating a Window, Renderer, and Setting an FPS Cap</title>
+      <link>https://www.mkbaltz.com/posts/c-sdl-how-to-create-a-window/</link>
+      <pubDate>Tue, 24 May 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-sdl-how-to-create-a-window/</guid>
+      <description>TL;DR Skip to Putting it all together section of this post to see the whole code.
+Getting SDL2 Windows - MSYS2 mingw64
+pacman -S mingw-w64-x86_64-SDL2 Ubuntu
+sudo apt install libsdl2-dev From SDL2 Website
+You can get SDL2 development libraries for your platform on the official website&amp;rsquo;s download page https://www.libsdl.org/download-2.0.php.
+Overview A typical SDL2 application does the following:
+ Initialize SDL subsystems. Create a window. Create a renderer. Process events, update data, and draw objects to screen, repeatedly until the program is stopped.</description>
+    </item>
+    
     <item>
       <title>C - How to Create a Zip Archive Using Miniz</title>
       <link>https://www.mkbaltz.com/posts/c-how-to-create-zip-miniz/</link>
