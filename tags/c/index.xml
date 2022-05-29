@@ -6,7 +6,19 @@
     <description>Recent content in c on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SDL2 Tutorial in C [02] - Rendering Shapes</title>
+      <link>https://www.mkbaltz.com/posts/c-sdl-rendering-shapes/</link>
+      <pubDate>Mon, 30 May 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-sdl-rendering-shapes/</guid>
+      <description>In this post we will look at the functions for drawing shapes provided by SDL2.
+TL;DR Skip to the example program.
+Overview Drawing shapes in SDL2 involves the following steps:
+ Create a renderer Set the drawing color for clearing the screen Clear the screen Set the drawing color for drawing functions Call one of the drawing functions Update the screen  Creating a renderer is usually done once during the initialization of the program.</description>
+    </item>
+    
     <item>
       <title>SDL2 Tutorial in C [01] - Creating a Window, Renderer, and Setting an FPS Cap</title>
       <link>https://www.mkbaltz.com/posts/c-sdl-how-to-create-a-window/</link>
