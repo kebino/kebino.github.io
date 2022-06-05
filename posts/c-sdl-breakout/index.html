@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>SDL2 Tutorial in C [03] - Breakout | mkbaltz</title>
+<meta name="keywords" content="c, programming, sdl, tutorial">
+<meta name="description" content="In this post we will use what we have learned previously to create a Breakout clone.
+Link to previous posts in the series:
+  SDL2 Tutorial in C [01] - Creating a Window, Renderer, and Setting an FPS Cap
+  SDL2 Tutorial in C [02] - Rendering Shapes
+  We will also learn how to display text and load fonts and for that we need to install the SDL2_ttf library.">
+<meta name="author" content="">
+<link rel="canonical" href="https://www.mkbaltz.com/posts/c-sdl-breakout/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.b4e19c453811e60acfec1f00c15ac2be1c53f6ab90187e684358ce7faaf48bab.css" integrity="sha256-tOGcRTgR5grP7B8AwVrCvhxT9quQGH5oQ1jOf6r0i6s=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://www.mkbaltz.com/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.mkbaltz.com/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.mkbaltz.com/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://www.mkbaltz.com/apple-touch-icon.png">
+<link rel="mask-icon" href="https://www.mkbaltz.com/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P5BFMXCEB4"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-P5BFMXCEB4', { 'anonymize_ip': false });
+}
+</script>
+<meta property="og:title" content="SDL2 Tutorial in C [03] - Breakout" />
+<meta property="og:description" content="In this post we will use what we have learned previously to create a Breakout clone.
+Link to previous posts in the series:
+  SDL2 Tutorial in C [01] - Creating a Window, Renderer, and Setting an FPS Cap
+  SDL2 Tutorial in C [02] - Rendering Shapes
+  We will also learn how to display text and load fonts and for that we need to install the SDL2_ttf library." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.mkbaltz.com/posts/c-sdl-breakout/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-06T00:00:00&#43;08:00" />
+<meta property="article:modified_time" content="2022-06-06T00:00:00&#43;08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SDL2 Tutorial in C [03] - Breakout"/>
+<meta name="twitter:description" content="In this post we will use what we have learned previously to create a Breakout clone.
+Link to previous posts in the series:
+  SDL2 Tutorial in C [01] - Creating a Window, Renderer, and Setting an FPS Cap
+  SDL2 Tutorial in C [02] - Rendering Shapes
+  We will also learn how to display text and load fonts and for that we need to install the SDL2_ttf library."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://www.mkbaltz.com/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "SDL2 Tutorial in C [03] - Breakout",
+      "item": "https://www.mkbaltz.com/posts/c-sdl-breakout/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SDL2 Tutorial in C [03] - Breakout",
+  "name": "SDL2 Tutorial in C [03] - Breakout",
+  "description": "In this post we will use what we have learned previously to create a Breakout clone.\nLink to previous posts in the series:\n  SDL2 Tutorial in C [01] - Creating a Window, Renderer, and Setting an FPS Cap\n  SDL2 Tutorial in C [02] - Rendering Shapes\n  We will also learn how to display text and load fonts and for that we need to install the SDL2_ttf library.",
+  "keywords": [
+    "c", "programming", "sdl", "tutorial"
+  ],
+  "articleBody": "In this post we will use what we have learned previously to create a Breakout clone.\nLink to previous posts in the series:\n  SDL2 Tutorial in C [01] - Creating a Window, Renderer, and Setting an FPS Cap\n  SDL2 Tutorial in C [02] - Rendering Shapes\n  We will also learn how to display text and load fonts and for that we need to install the SDL2_ttf library.\nWindows - Msys2 mingw64\npacman -S mingw-w64-x86_64-SDL2_ttf Ubuntu\nsudo apt install libsdl2-ttf-dev Github\nYou can get SDL2_ttf releases on its github page. SDL2_ttf Releases.\nTL;DR Skip to the code.\nOverview In the game Breakout, the player is represented by a paddle that can move left and right within the bounds of the screen. The goal of the game is to break all the blocks on the upper portion of the screen by hitting it with the moving ball. The player has no control over the ball but will bounce and change direction when it hits the player, a block, or a wall. If it falls below the screen, the player will lose.\nStructs and Enums When our program starts we will show a Press [ Space ] to play to the player. The game will not start until the player press the space key. In other words, we will have two game states. In our code it will be represented as enum values.\ntypedef enum GameState {  GAME_STATE_PRESS_TO_PLAY,  GAME_STATE_PLAYING } GameState; We will represent the paddle, ball, and blocks with this struct:\ntypedef struct Block {  SDL_FRect rect; // position, width and height  float speed_x; // current speed in x-axis  float speed_y; // current speed in y-axis  uint8_t r; // red value 0 - 255  uint8_t g; // green value 0 -255  uint8_t b; // blue value 0 - 255  uint8_t a; // alpha value 0 - 255  bool is_alive; // determines if block should be processed } Block; We will also create an enum to represent the side of the of our Block struct. It will be useful later when we are checking for collision.\ntypedef enum BlockSide {  BLOCKSIDE_TOP,  BLOCKSIDE_RIGHT,  BLOCKSIDE_BOTTOM,  BLOCKSIDE_LEFT } BlockSide; Our game will need text to be displayed. For that we will use this struct. We will get into the details later on how to load fonts and display text.\ntypedef struct Label {  SDL_Texture* texture; // holds texture created from SDL_ttf  SDL_Rect rect; // position, width, and height } Label; Lastly, we need to create a struct that will hold all the in-game data that our game will need.\ntypedef struct Game {  char title[32]; // window title  int window_width; // width of the window  int window_height; // height of the window  bool is_running; // game loop status  SDL_Window* window; // window  SDL_Renderer* renderer; // renderer  Block paddle; // Paddle that the player controls  Block ball; // Ball  Block blocks[32]; // Breakable blocks  int no_of_blocks; // number of breakable blocks  int score; // player's score  Label* lbl_score; // in-game text  Label* lbl_score_value; // in-game text representing the current score  Label* lbl_press_to_start; // in-game text  float speed_ball; // ball's move speed  float speed_paddle; // paddle's move speed  GameState state; // current game state } Game; Initializing Game Data We will be creating a function to initialize the game data.\nvoid initialize(Game* game); This function will set the initial values for each property of our Game struct. The implementation is pretty much just assigning values so we will skip the explanation for most of it. Let’s just focus on the part related to loading fonts since we haven’t done that yet in the previous posts.\nLoading Fonts To display text on the screen we first need to load a font.\nTTF_Font* TTF_OpenFont(const char* font_path, int size); After loading the font we can now create text images.\nSDL_Surface* TTF_RenderText_Solid(TTF_Font* font, // loaded font  const char* str, // text to render  SDL_Color color); // text color As we can see it returns an SDL_Surface pointer. An SDL_Surface are images that are stored in memory. To Draw it on Screen we must convert it to an SDL_Texture. SDL_Surface and SDL_Texture is similar in that they are representation of the loaded image but the difference is an SDL_Texture is stored in the GPU.\nTo convert an SDL_Surface to a SDL_Texture, we use SDL_CreateTextureFromSurface.\nSDL_Texture* SDL_CreateTextureFromSurface(SDL_Renderer* renderer, SDL_Surface* surface); After converting, we no longer need SDL_Surface in memory so we can safely free it.\nvoid SDL_FreeSurface(SDL_Surface* surface); Same for the font, we can close it once we are done using it.\nvoid TTF_CloseFont(TTF_Font* font); In our game we created a struct Label to hold the texture created from a font. We have two functions tied to it. One for creating and the other to release memory after we’re done.\n// Creates a Label instance Label* label_create(const char* str, const char* font_path, int size, SDL_Renderer* renderer) {  Label* label = malloc(sizeof(Label));   TTF_Font* font = TTF_OpenFont(font_path, size);  SDL_Surface* surface = TTF_RenderText_Solid(font, str, (SDL_Color){ 0, 0, 0 });  label-texture = SDL_CreateTextureFromSurface(renderer, surface);   label-rect.x = 0;  label-rect.y = 0;  SDL_QueryTexture(label-texture, NULL, NULL, \u0026(label-rect.w), \u0026(label-rect.h));   SDL_FreeSurface(surface);  TTF_CloseFont(font);   return label; }  // Free Label instance along with its resources void label_destroy(Label* label) {  if(NULL == label) return;   if(label-texture)  {  SDL_DestroyTexture(label-texture);  }   free(label); } You may notice that the Label struct also stores the position and dimension of the created texture. This will be useful later when we want to render it to the screen.\nRendering to screen Same for initialization, we will also create a function for rendering.\nvoid draw(Game* game); Again we will not be explaining each line inside this function but we will look on the important parts.\nDrawing the paddle, ball, and blocks The paddle, ball, and blocks are represented by the sturct Block. We will create a helper function to draw them.\nvoid draw_block(Block* block, SDL_Renderer* renderer) {  SDL_SetRenderDrawColor(renderer, block-r, block-g, block-b, block-a);  SDL_RenderFillRectF(renderer, \u0026(block-rect)); } Rendering Our Label Struct To render our Label struct, we can use the SDL_RenderCopy.\nint SDL_RenderCopy(SDL_Renderer* renderer // renderer  SDL_Texture* texture, // texture  const SDL_Rect* srcrect, // the source SDL_Rect  // structure or NULL for the entire texture  const SDL_Rect* dstrect); // the destination SDL_Rect structure  // or NULL for the entire rendering target In our case we can pass the label texture, srcrect as NULL, and pass the label rect on the dstrect.\nEvents and User Inputs Again, we will have a function for processing events.\nvoid process_events(Game* game, SDL_Event* event); Inside this function if the game state is GAME_STATE_PRESS_TO_PLAY then we check if the space key is pressed. Once pressed we then change the game state to GAME_STATE_PLAYING and make the ball to start moving by adding it speed.\nOn GAME_STATE_PLAYING we add speed to the paddle when either the left or right key is pressed. Then upon release we set the speed of the paddle to 0 again.\nUpdate Function This is where most of the game logic is.\nvoid update(Game* game); Below is a summary of what the function is doing\nPaddle\n Updates the position of the paddle based on its current speed.  Ball\n Updates the position of the ball based on its current speed. Check for collisions. Change direction if there’s a collision. If it collided to a block, then set block.alive = false and increment the score.  Check for lose and victory conditions\n If all blocks are cleared the player wins. If ball falls below the screen the player loses.  As for detecting collision first we will create a helper function to get the position of the side of the Block struct that we want to check.\n// returns a float value representing the selected side of // the given block. float block_get_side(Block* block, BlockSide side) {  float value = 0.0f;  switch(side)  {  case BLOCKSIDE_TOP:  value = block-rect.y;  break;  case BLOCKSIDE_RIGHT:  value = block-rect.x + block-rect.w;  break;  case BLOCKSIDE_BOTTOM:  value = block-rect.y + block-rect.h;  break;  case BLOCKSIDE_LEFT:  value = block-rect.x;  break;  }   return value; } Below is the code to check for the actual collision. The idea is to check if there is an overlap between the two and if there is return true, otherwise false.\n// returns true if a collision is detected // between given blocks. bool has_ball_collided_to(Block* ball, Block* block) {  bool bottom_hit_top = block_get_side(ball, BLOCKSIDE_BOTTOM)  block_get_side(block, BLOCKSIDE_TOP)  \u0026\u0026 block_get_side(ball, BLOCKSIDE_BOTTOM)  block_get_side(block, BLOCKSIDE_BOTTOM);  bool top_hit_bottom = block_get_side(ball, BLOCKSIDE_TOP)  block_get_side(block, BLOCKSIDE_BOTTOM)  \u0026\u0026 block_get_side(ball, BLOCKSIDE_TOP)  block_get_side(block, BLOCKSIDE_TOP);  bool right_within_width = block_get_side(ball, BLOCKSIDE_RIGHT)  block_get_side(block, BLOCKSIDE_LEFT)  \u0026\u0026 block_get_side(ball, BLOCKSIDE_RIGHT)  block_get_side(block, BLOCKSIDE_RIGHT);  bool left_within_width = block_get_side(ball, BLOCKSIDE_LEFT)  block_get_side(block, BLOCKSIDE_RIGHT)  \u0026\u0026 block_get_side(ball, BLOCKSIDE_LEFT)  block_get_side(block, BLOCKSIDE_LEFT);   return (bottom_hit_top || top_hit_bottom) \u0026\u0026 (right_within_width || left_within_width); } Game Over and Victory For this tutorial we handle victory and lose conditions by restarting the game. To do that we simply call the initialize function again.\nBreakout Below is the complete code for our breakout game.\nmain.c\n#include #include #include #include #include #include  // represents the game state. typedef enum GameState {  GAME_STATE_PRESS_TO_PLAY,  GAME_STATE_PLAYING } GameState;  // enum to represent each side of a Block. typedef enum BlockSide {  BLOCKSIDE_TOP,  BLOCKSIDE_RIGHT,  BLOCKSIDE_BOTTOM,  BLOCKSIDE_LEFT } BlockSide;  // Struct for ball, paddle and breakable blocks. typedef struct Block {  SDL_FRect rect; // position, width and height  float speed_x; // current speed in x-axis  float speed_y; // current speed in y-axis  uint8_t r; // red value 0 - 255  uint8_t g; // green value 0 -255  uint8_t b; // blue value 0 - 255  uint8_t a; // alpha value 0 - 255  bool is_alive; // determines if block should be processed } Block;  // Holds texture, position, and dimension // data for text display typedef struct Label {  SDL_Texture* texture; // holds texture created from SDL_ttf  SDL_Rect rect; // position, width, and height } Label;  // struct to hold in-game data. typedef struct Game {  char title[32]; // window title  int window_width; // width of the window  int window_height; // height of the window  bool is_running; // game loop status  SDL_Window* window; // window  SDL_Renderer* renderer; // renderer  Block paddle; // Paddle that the player controls  Block ball; // Ball  Block blocks[32]; // Breakable blocks  int no_of_blocks; // number of breakable blocks  int score; // player's score  Label* lbl_score; // in-game text  Label* lbl_score_value; // in-game text representing the current score  Label* lbl_press_to_start; // in-game text  float speed_ball; // ball's move speed  float speed_paddle; // paddle's move speed  GameState state; // current game state } Game;  // function prototypes void initialize(Game* game); void process_events(Game* game, SDL_Event* event); void update(Game* game); void draw(Game* game); void draw_block(Block* block, SDL_Renderer* renderer); float block_get_side(Block* block, BlockSide side); bool has_ball_collided_to(Block* ball, Block* block); Label* label_create(const char* str, const char* font_path, int size, SDL_Renderer* renderer); void label_destroy(Label* label);  int main(int argc, char** args) {  // FPS cap  const float fps_cap = 60.0f;  const float fps_cap_in_ms = 1000.0f/fps_cap;  uint64_t start;  uint64_t end;  float delta;   // initialize SDL libraries  SDL_Init(SDL_INIT_EVERYTHING);  TTF_Init();   // initialize game data  Game game = {0};  initialize(\u0026game);   // background rect  SDL_Rect bg_rect = {  .x = 0,  .y = 0,  .w = game.window_width,  .h = game.window_height  };   // game loop  while(game.is_running)  {  start = SDL_GetPerformanceCounter();   // process events  SDL_Event event;  process_events(\u0026game, \u0026event);   // update game  update(\u0026game);   // clear screen  SDL_SetRenderDrawColor(game.renderer, 200, 200, 200, 255);  SDL_RenderClear(game.renderer);   // draw background rect  SDL_SetRenderDrawColor(game.renderer, 255, 255, 255, 255);  SDL_RenderFillRect(game.renderer, \u0026bg_rect);   // draw game objects  draw(\u0026game);   // render drawing operations to screen  SDL_RenderPresent(game.renderer);   end = SDL_GetPerformanceCounter();   // cap fps  delta = (end - start)/(float) SDL_GetPerformanceFrequency() * 1000.0f;  if(delta  fps_cap_in_ms)  {  SDL_Delay(fps_cap_in_ms - delta);  }  }   // Free allocated resources  if(game.lbl_score_value) label_destroy(game.lbl_score_value);  if(game.lbl_score) label_destroy(game.lbl_score);  if(game.lbl_press_to_start) label_destroy(game.lbl_press_to_start);   SDL_DestroyRenderer(game.renderer);  SDL_DestroyWindow(game.window);  TTF_Quit();  SDL_Quit();   return EXIT_SUCCESS; }  // Sets the initial values of the game data. void initialize(Game* game) {  // window data  strcpy(game-title, \"SDL Breakout\");  game-window_width = 640;  game-window_height = 360;   // create window  if(NULL == game-window)  {  game-window = SDL_CreateWindow(  game-title,  SDL_WINDOWPOS_CENTERED,  SDL_WINDOWPOS_CENTERED,  game-window_width,  game-window_height,  SDL_WINDOW_RESIZABLE  );  }   // create renderer  if(NULL == game-renderer)  {  game-renderer = SDL_CreateRenderer(game-window, -1, SDL_RENDERER_ACCELERATED| SDL_RENDERER_PRESENTVSYNC);  SDL_RenderSetLogicalSize(game-renderer, game-window_width, game-window_height);  }   // game loop state  game-is_running = true;   // game vars  game-state = GAME_STATE_PRESS_TO_PLAY;  game-speed_ball = 3.0f;  game-speed_paddle = 5.0f;  game-score = 0;   if(game-lbl_score_value)  {  label_destroy(game-lbl_score_value);  }  game-lbl_score_value = label_create(\"0\", \"./OpenSans-Bold.ttf\", 32, game-renderer);  game-lbl_score_value-rect.x = game-window_width/2 - game-lbl_score_value-rect.w/2;  game-lbl_score_value-rect.y = game-window_height/2 - game-lbl_score_value-rect.h/2;   if(game-lbl_score)  {  label_destroy(game-lbl_score);  }  game-lbl_score = label_create(\"SCORE\", \"./OpenSans-Bold.ttf\", 16, game-renderer);  game-lbl_score-rect.x = game-window_width/2 - game-lbl_score-rect.w/2;  game-lbl_score-rect.y = game-lbl_score_value-rect.y + game-lbl_score_value-rect.h + 8;   if(game-lbl_press_to_start)  {  label_destroy(game-lbl_press_to_start);  }  game-lbl_press_to_start = label_create(\"Press [SPACE] to play.\", \"./OpenSans-Bold.ttf\", 16, game-renderer);  game-lbl_press_to_start-rect.x = game-window_width/2 - game-lbl_press_to_start-rect.w/2;  game-lbl_press_to_start-rect.y = game-lbl_score_value-rect.y + game-lbl_score_value-rect.h + 8;   // initialize paddle  game-paddle.rect.w = 64.0f;  game-paddle.rect.h = 16.0f;  game-paddle.rect.x = game-window_width/2 - game-paddle.rect.w/2;  game-paddle.rect.y = game-window_height - game-paddle.rect.h * 2;  game-paddle.is_alive = true;  game-paddle.r = 200;  game-paddle.g = 0;  game-paddle.b = 0;  game-paddle.a = 255;  game-paddle.speed_x = 0.0f;  game-paddle.speed_y = 0.0f;   // initialize ball  game-ball.rect.w = 16.0f;  game-ball.rect.h = 16.0f;  game-ball.rect.x = game-window_width/2 - game-ball.rect.w/2;  game-ball.rect.y = game-paddle.rect.y - game-ball.rect.h * 2;  game-ball.is_alive = true;  game-ball.r = 150;  game-ball.g = 150;  game-ball.b = 150;  game-ball.a = 255;  game-ball.speed_x = 0.0f;  game-ball.speed_y = 0.0f;   // initialize breakable blocks  game-no_of_blocks = sizeof(game-blocks)/sizeof(Block);  const float padding = 8.0f;  const int no_of_blocks_per_row = 8;  const float offset_x = 32.0f;  const float offset_y = 16.0f;  int row = 0;  int col = 0;   for(int index = 0; index  game-no_of_blocks; index++)  {  game-blocks[index].rect.w = 64.0f;  game-blocks[index].rect.h = 16.0f;  game-blocks[index].rect.x = offset_x + (padding + game-blocks[index].rect.w) * col;  game-blocks[index].rect.y = offset_y + (padding + game-blocks[index].rect.h) * row;  game-blocks[index].is_alive = true;  game-blocks[index].r = rand() % 200;  game-blocks[index].g = rand() % 200;  game-blocks[index].b = rand() % 200;  game-blocks[index].a = 255;  game-blocks[index].speed_x = 0.0f;  game-blocks[index].speed_y = 0.0f;   col++;  if(col == no_of_blocks_per_row)  {  col = 0;  row++;  }  } }  // Process events and user inputs. // Called every frame. void process_events(Game* game, SDL_Event* event) {  while(SDL_PollEvent(event))  {  if(SDL_QUIT == event-type)  {  game-is_running = false;  }   switch(game-state)  {  case GAME_STATE_PRESS_TO_PLAY:  if(SDL_KEYDOWN == event-type \u0026\u0026 SDLK_SPACE == event-key.keysym.sym)  {  game-ball.speed_x = game-speed_ball;  game-ball.speed_y = -game-speed_ball;  game-state = GAME_STATE_PLAYING;  }  break;  case GAME_STATE_PLAYING:  if(SDL_KEYDOWN == event-type \u0026\u0026 SDLK_LEFT == event-key.keysym.sym)  {  game-paddle.speed_x = -game-speed_paddle;  }  if(SDL_KEYDOWN == event-type \u0026\u0026 SDLK_RIGHT == event-key.keysym.sym)  {  game-paddle.speed_x = game-speed_paddle;  }  if(SDL_KEYUP == event-type \u0026\u0026  (SDLK_RIGHT == event-key.keysym.sym || SDLK_LEFT == event-key.keysym.sym))  {  game-paddle.speed_x = 0.0f;  }  break;  default:  break;  }  } }  // Updates game data. // Called every frame. void update(Game* game) {  switch(game-state)  {  case GAME_STATE_PRESS_TO_PLAY:  break;  case GAME_STATE_PLAYING:   // update paddle  // movement  game-paddle.rect.x += game-paddle.speed_x;  // set bounds  if(block_get_side(\u0026(game-paddle), BLOCKSIDE_LEFT)  0)  {  game-paddle.rect.x = 0;  }  else if(block_get_side(\u0026(game-paddle), BLOCKSIDE_RIGHT)  game-window_width)  {  game-paddle.rect.x = game-window_width - game-paddle.rect.w;  }   // update ball  // movement  game-ball.rect.x += game-ball.speed_x;  game-ball.rect.y += game-ball.speed_y;  // check wall and ceiling collision  if(block_get_side(\u0026(game-ball), BLOCKSIDE_LEFT)  0)  {  game-ball.rect.x = 0;  game-ball.speed_x = game-ball.speed_x * -1;  }  if(block_get_side(\u0026(game-ball), BLOCKSIDE_RIGHT)  game-window_width)  {  game-ball.rect.x = game-window_width - game-ball.rect.w;  game-ball.speed_x = game-ball.speed_x * -1;  }  if(block_get_side(\u0026(game-ball), BLOCKSIDE_TOP)  0)  {  game-ball.rect.y = 0;  game-ball.speed_y = game-ball.speed_y * -1;  }  // check out of bounds  if(block_get_side(\u0026(game-ball), BLOCKSIDE_BOTTOM)  game-window_height)  {  // restart game  initialize(game);  return;  }  // check paddle collision  if(has_ball_collided_to(\u0026(game-ball), \u0026(game-paddle)))  {  game-ball.rect.y = block_get_side(\u0026(game-paddle), BLOCKSIDE_TOP) - game-ball.rect.h;  game-ball.speed_y = game-ball.speed_y * -1;  }  // check block collision  for(int index = 0; index  game-no_of_blocks; index++)  {  if(!game-blocks[index].is_alive) continue;  if(has_ball_collided_to(\u0026(game-ball), \u0026(game-blocks[index])))  {  // kill block  game-blocks[index].is_alive = false;   // update score  game-score += 1;  char buff[32];  sprintf(buff, \"%d\", game-score);  label_destroy(game-lbl_score_value);  game-lbl_score_value = label_create(buff, \"./OpenSans-Bold.ttf\", 32, game-renderer);  game-lbl_score_value-rect.x = game-window_width/2 - game-lbl_score_value-rect.w/2;  game-lbl_score_value-rect.y = game-window_height/2 - game-lbl_score_value-rect.h/2;   // bounce  game-ball.speed_y = game-ball.speed_y * -1;   if(game-score == game-no_of_blocks)  {  // no more blocks  // restart game  initialize(game);  }   break;  }  }  break;   default:  break;  } }  // Render game data to screen. // Called every frame. void draw(Game* game) {  // draw labels  switch(game-state)  {  case GAME_STATE_PRESS_TO_PLAY:  SDL_RenderCopy(game-renderer, game-lbl_press_to_start-texture, NULL, \u0026(game-lbl_press_to_start-rect));  break;  case GAME_STATE_PLAYING:  SDL_RenderCopy(game-renderer, game-lbl_score_value-texture, NULL, \u0026(game-lbl_score_value-rect));  SDL_RenderCopy(game-renderer, game-lbl_score-texture, NULL, \u0026(game-lbl_score-rect));  break;  default:  break;  }   // draw blocks  for(int index = 0; index  game-no_of_blocks; index++)  {  if(game-blocks[index].is_alive)  {  draw_block(\u0026(game-blocks[index]), game-renderer);  }  }   // draw ball  draw_block(\u0026(game-ball), game-renderer);   // draw paddle  draw_block(\u0026(game-paddle), game-renderer); }  void draw_block(Block* block, SDL_Renderer* renderer) {  SDL_SetRenderDrawColor(renderer, block-r, block-g, block-b, block-a);  SDL_RenderFillRectF(renderer, \u0026(block-rect)); }  // returns a float value representing the selected side of // the given block. float block_get_side(Block* block, BlockSide side) {  float value = 0.0f;  switch(side)  {  case BLOCKSIDE_TOP:  value = block-rect.y;  break;  case BLOCKSIDE_RIGHT:  value = block-rect.x + block-rect.w;  break;  case BLOCKSIDE_BOTTOM:  value = block-rect.y + block-rect.h;  break;  case BLOCKSIDE_LEFT:  value = block-rect.x;  break;  }   return value; }  // returns true if a collision is detected // between given blocks. bool has_ball_collided_to(Block* ball, Block* block) {  bool bottom_hit_top = block_get_side(ball, BLOCKSIDE_BOTTOM)  block_get_side(block, BLOCKSIDE_TOP)  \u0026\u0026 block_get_side(ball, BLOCKSIDE_BOTTOM)  block_get_side(block, BLOCKSIDE_BOTTOM);  bool top_hit_bottom = block_get_side(ball, BLOCKSIDE_TOP)  block_get_side(block, BLOCKSIDE_BOTTOM)  \u0026\u0026 block_get_side(ball, BLOCKSIDE_TOP)  block_get_side(block, BLOCKSIDE_TOP);  bool right_within_width = block_get_side(ball, BLOCKSIDE_RIGHT)  block_get_side(block, BLOCKSIDE_LEFT)  \u0026\u0026 block_get_side(ball, BLOCKSIDE_RIGHT)  block_get_side(block, BLOCKSIDE_RIGHT);  bool left_within_width = block_get_side(ball, BLOCKSIDE_LEFT)  block_get_side(block, BLOCKSIDE_RIGHT)  \u0026\u0026 block_get_side(ball, BLOCKSIDE_LEFT)  block_get_side(block, BLOCKSIDE_LEFT);  return (bottom_hit_top || top_hit_bottom) \u0026\u0026 (right_within_width || left_within_width); }  // Creates a Label instance Label* label_create(const char* str, const char* font_path, int size, SDL_Renderer* renderer) {  Label* label = malloc(sizeof(Label));   TTF_Font* font = TTF_OpenFont(font_path, size);  SDL_Surface* surface = TTF_RenderText_Solid(font, str, (SDL_Color){ 0, 0, 0 });  label-texture = SDL_CreateTextureFromSurface(renderer, surface);   label-rect.x = 0;  label-rect.y = 0;  SDL_QueryTexture(label-texture, NULL, NULL, \u0026(label-rect.w), \u0026(label-rect.h));   SDL_FreeSurface(surface);  TTF_CloseFont(font);   return label; }  // Free Label instance along with its resources void label_destroy(Label* label) {  if(NULL == label) return;   if(label-texture)  {  SDL_DestroyTexture(label-texture);  }   free(label); } Compiling On Windows using mingw:\ngcc main.c -o game -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -mwindows With pkg-config:\ngcc `pkg-config sdl2 --cflags` main.c -o game `pkg-config sdl2 --libs` -lSDL2_ttf Output  Thank you for reading!\nLike this post? \nFollow this blog on Twitter and stay updated!\n",
+  "wordCount" : "2927",
+  "inLanguage": "en",
+  "datePublished": "2022-06-06T00:00:00+08:00",
+  "dateModified": "2022-06-06T00:00:00+08:00",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.mkbaltz.com/posts/c-sdl-breakout/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "mkbaltz",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.mkbaltz.com/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://www.mkbaltz.com/" accesskey="h" title="mkbaltz (Alt + H)">mkbaltz</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://www.mkbaltz.com/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mkbaltz.com/archives/" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://www.mkbaltz.com/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      SDL2 Tutorial in C [03] - Breakout
+    </h1>
+    <div class="post-meta"><span title='2022-06-06 00:00:00 +0800 CST'>June 6, 2022</span>
+
+</div>
+  </header> 
+  <div class="post-content"><p>In this post we will use what we have learned previously to
+create a Breakout clone.</p>
+<p><strong>Link to previous posts in the series:</strong></p>
+<ul>
+<li>
+<p><a href="https://www.mkbaltz.com/posts/c-sdl-how-to-create-a-window/" title="SDL2 Tutorial in C [01] - Creating a Window, Renderer, and Setting an FPS Cap">SDL2 Tutorial in C [01] - Creating a Window, Renderer, and Setting an FPS Cap</a></p>
+</li>
+<li>
+<p><a href="https://www.mkbaltz.com/posts/c-sdl-rendering-shapes/" title="SDL2 Tutorial in C [02] - Rendering Shapes">SDL2 Tutorial in C [02] - Rendering Shapes</a></p>
+</li>
+</ul>
+<p>We will also learn how to display text and load fonts
+and for that we need to install the SDL2_ttf library.</p>
+<p><strong>Windows - Msys2 mingw64</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pacman -S mingw-w64-x86_64-SDL2_ttf
+</span></span></code></pre></div><p><strong>Ubuntu</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install libsdl2-ttf-dev
+</span></span></code></pre></div><p><strong>Github</strong></p>
+<p>You can get SDL2_ttf releases on its github page.
+<a href="https://github.com/libsdl-org/SDL_ttf/releases">SDL2_ttf Releases</a>.</p>
+<h2 id="tldr">TL;DR<a hidden class="anchor" aria-hidden="true" href="#tldr">#</a></h2>
+<p>Skip to the <a href="#breakout" title="Breakout code">code</a>.</p>
+<h2 id="overview">Overview<a hidden class="anchor" aria-hidden="true" href="#overview">#</a></h2>
+<p>In the game Breakout, the player is represented by a <em>paddle</em> that can move left and right
+within the bounds of the screen. The goal of the game is to break all the <em>blocks</em> on the
+upper portion of the screen by hitting it with the moving <em>ball</em>. The player has no control
+over the ball but will bounce and change direction when it hits the player, a block, or a
+wall. If it falls below the screen, the player will lose.</p>
+<h2 id="structs-and-enums">Structs and Enums<a hidden class="anchor" aria-hidden="true" href="#structs-and-enums">#</a></h2>
+<p>When our program starts we will show a <em>Press [ Space ] to play</em> to the player.
+The game will not start until the player press the space key. In other words, we will
+have two game states. In our code it will be represented as enum values.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> GameState {
+</span></span><span style="display:flex;"><span>    GAME_STATE_PRESS_TO_PLAY,
+</span></span><span style="display:flex;"><span>    GAME_STATE_PLAYING
+</span></span><span style="display:flex;"><span>} GameState;
+</span></span></code></pre></div><p>We will represent the <em>paddle</em>, <em>ball</em>, and <em>blocks</em> with
+this struct:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> Block {
+</span></span><span style="display:flex;"><span>    SDL_FRect rect; <span style="color:#75715e">// position, width and height
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">float</span> speed_x;  <span style="color:#75715e">// current speed in x-axis
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">float</span> speed_y;  <span style="color:#75715e">// current speed in y-axis
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint8_t</span> r;      <span style="color:#75715e">// red value 0 - 255
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint8_t</span> g;      <span style="color:#75715e">// green value 0 -255
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint8_t</span> b;      <span style="color:#75715e">// blue value 0 - 255
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint8_t</span> a;      <span style="color:#75715e">// alpha value 0 - 255
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> is_alive;  <span style="color:#75715e">// determines if block should be processed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} Block;
+</span></span></code></pre></div><p>We will also create an enum to represent the side of the of our
+Block struct. It will be useful later when we are checking for collision.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> BlockSide {
+</span></span><span style="display:flex;"><span>    BLOCKSIDE_TOP,
+</span></span><span style="display:flex;"><span>    BLOCKSIDE_RIGHT,
+</span></span><span style="display:flex;"><span>    BLOCKSIDE_BOTTOM,
+</span></span><span style="display:flex;"><span>    BLOCKSIDE_LEFT
+</span></span><span style="display:flex;"><span>} BlockSide;
+</span></span></code></pre></div><p>Our game will need text to be displayed. For that we will use this struct.
+We will get into the details later on how to load fonts and display text.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> Label {
+</span></span><span style="display:flex;"><span>    SDL_Texture<span style="color:#f92672">*</span> texture; <span style="color:#75715e">// holds texture created from SDL_ttf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SDL_Rect rect;        <span style="color:#75715e">// position, width, and height
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} Label;
+</span></span></code></pre></div><p>Lastly, we need to create a struct that will hold all the in-game data
+that our game will need.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> Game {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> title[<span style="color:#ae81ff">32</span>];            <span style="color:#75715e">// window title
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> window_width;          <span style="color:#75715e">// width of the window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> window_height;         <span style="color:#75715e">// height of the window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> is_running;           <span style="color:#75715e">// game loop status
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SDL_Window<span style="color:#f92672">*</span> window;        <span style="color:#75715e">// window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SDL_Renderer<span style="color:#f92672">*</span> renderer;    <span style="color:#75715e">// renderer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Block paddle;              <span style="color:#75715e">// Paddle that the player controls
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Block ball;                <span style="color:#75715e">// Ball
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Block blocks[<span style="color:#ae81ff">32</span>];          <span style="color:#75715e">// Breakable blocks 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> no_of_blocks;          <span style="color:#75715e">// number of breakable blocks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> score;                 <span style="color:#75715e">// player&#39;s score
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Label<span style="color:#f92672">*</span> lbl_score;          <span style="color:#75715e">// in-game text 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Label<span style="color:#f92672">*</span> lbl_score_value;    <span style="color:#75715e">// in-game text representing the current score
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Label<span style="color:#f92672">*</span> lbl_press_to_start; <span style="color:#75715e">// in-game text 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">float</span> speed_ball;          <span style="color:#75715e">// ball&#39;s move speed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">float</span> speed_paddle;        <span style="color:#75715e">// paddle&#39;s move speed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    GameState state;           <span style="color:#75715e">// current game state
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} Game;
+</span></span></code></pre></div><h2 id="initializing-game-data">Initializing Game Data<a hidden class="anchor" aria-hidden="true" href="#initializing-game-data">#</a></h2>
+<p>We will be creating a function to initialize the game data.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">initialize</span>(Game<span style="color:#f92672">*</span> game);
+</span></span></code></pre></div><p>This function will set the initial values for each property of our Game struct.
+The implementation is pretty much just assigning values so we will skip the explanation
+for most of it. Let&rsquo;s just focus on the part related to loading fonts since we
+haven&rsquo;t done that yet in the previous posts.</p>
+<h3 id="loading-fonts">Loading Fonts<a hidden class="anchor" aria-hidden="true" href="#loading-fonts">#</a></h3>
+<p>To display text on the screen we first need to load a font.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>TTF_Font<span style="color:#f92672">*</span> <span style="color:#a6e22e">TTF_OpenFont</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> font_path, <span style="color:#66d9ef">int</span> size);
+</span></span></code></pre></div><p>After loading the font we can now create text images.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>SDL_Surface<span style="color:#f92672">*</span> <span style="color:#a6e22e">TTF_RenderText_Solid</span>(TTF_Font<span style="color:#f92672">*</span> font, <span style="color:#75715e">// loaded font
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> str,  <span style="color:#75715e">// text to render
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                SDL_Color color); <span style="color:#75715e">// text color
+</span></span></span></code></pre></div><p>As we can see it returns an <em>SDL_Surface</em> pointer. An SDL_Surface are images
+that are stored in memory. To Draw it on Screen we must convert it to an
+<em>SDL_Texture</em>. SDL_Surface and SDL_Texture is similar in that they are representation
+of the loaded image but the difference is an SDL_Texture is stored in the GPU.</p>
+<p>To convert an SDL_Surface to a SDL_Texture, we use <em>SDL_CreateTextureFromSurface</em>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>SDL_Texture<span style="color:#f92672">*</span> <span style="color:#a6e22e">SDL_CreateTextureFromSurface</span>(SDL_Renderer<span style="color:#f92672">*</span> renderer, SDL_Surface<span style="color:#f92672">*</span> surface);
+</span></span></code></pre></div><p>After converting, we no longer need SDL_Surface in memory so we can safely free it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SDL_FreeSurface</span>(SDL_Surface<span style="color:#f92672">*</span> surface);
+</span></span></code></pre></div><p>Same for the font, we can close it once we are done using it.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">TTF_CloseFont</span>(TTF_Font<span style="color:#f92672">*</span> font);
+</span></span></code></pre></div><p>In our game we created a struct <em>Label</em> to hold the texture created from a font.
+We have two functions tied to it. One for creating and the other to release memory after
+we&rsquo;re done.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// Creates a Label instance
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Label<span style="color:#f92672">*</span> <span style="color:#a6e22e">label_create</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> str, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> font_path, <span style="color:#66d9ef">int</span> size, SDL_Renderer<span style="color:#f92672">*</span> renderer)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Label<span style="color:#f92672">*</span> label <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(Label));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    TTF_Font<span style="color:#f92672">*</span> font <span style="color:#f92672">=</span> TTF_OpenFont(font_path, size);
+</span></span><span style="display:flex;"><span>    SDL_Surface<span style="color:#f92672">*</span> surface <span style="color:#f92672">=</span> TTF_RenderText_Solid(font, str, (SDL_Color){ <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span> });
+</span></span><span style="display:flex;"><span>    label<span style="color:#f92672">-&gt;</span>texture <span style="color:#f92672">=</span> SDL_CreateTextureFromSurface(renderer, surface);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    label<span style="color:#f92672">-&gt;</span>rect.x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    label<span style="color:#f92672">-&gt;</span>rect.y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    SDL_QueryTexture(label<span style="color:#f92672">-&gt;</span>texture, NULL, NULL, <span style="color:#f92672">&amp;</span>(label<span style="color:#f92672">-&gt;</span>rect.w), <span style="color:#f92672">&amp;</span>(label<span style="color:#f92672">-&gt;</span>rect.h));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    SDL_FreeSurface(surface);
+</span></span><span style="display:flex;"><span>    TTF_CloseFont(font);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> label;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Free Label instance along with its resources
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">label_destroy</span>(Label<span style="color:#f92672">*</span> label)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(NULL <span style="color:#f92672">==</span> label) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(label<span style="color:#f92672">-&gt;</span>texture)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        SDL_DestroyTexture(label<span style="color:#f92672">-&gt;</span>texture);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    free(label);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>You may notice that the <em>Label</em> struct also stores the position and dimension of the
+created texture. This will be useful later when we want to render it to the screen.</p>
+<h2 id="rendering-to-screen">Rendering to screen<a hidden class="anchor" aria-hidden="true" href="#rendering-to-screen">#</a></h2>
+<p>Same for initialization, we will also create a function for rendering.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">draw</span>(Game<span style="color:#f92672">*</span> game);
+</span></span></code></pre></div><p>Again we will not be explaining each line inside this function but we will look
+on the important parts.</p>
+<h3 id="drawing-the-paddle-ball-and-blocks">Drawing the paddle, ball, and blocks<a hidden class="anchor" aria-hidden="true" href="#drawing-the-paddle-ball-and-blocks">#</a></h3>
+<p>The paddle, ball, and blocks are represented by the sturct <em>Block</em>. We will create
+a helper function to draw them.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">draw_block</span>(Block<span style="color:#f92672">*</span> block, SDL_Renderer<span style="color:#f92672">*</span> renderer)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    SDL_SetRenderDrawColor(renderer, block<span style="color:#f92672">-&gt;</span>r, block<span style="color:#f92672">-&gt;</span>g, block<span style="color:#f92672">-&gt;</span>b, block<span style="color:#f92672">-&gt;</span>a);
+</span></span><span style="display:flex;"><span>    SDL_RenderFillRectF(renderer, <span style="color:#f92672">&amp;</span>(block<span style="color:#f92672">-&gt;</span>rect));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="rendering-our-label-struct">Rendering Our Label Struct<a hidden class="anchor" aria-hidden="true" href="#rendering-our-label-struct">#</a></h3>
+<p>To render our Label struct, we can use the <em>SDL_RenderCopy</em>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">SDL_RenderCopy</span>(SDL_Renderer<span style="color:#f92672">*</span> renderer <span style="color:#75715e">// renderer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                SDL_Texture<span style="color:#f92672">*</span> texture,     <span style="color:#75715e">// texture
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">const</span> SDL_Rect<span style="color:#f92672">*</span> srcrect,  <span style="color:#75715e">// the source SDL_Rect 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                          <span style="color:#75715e">// structure or NULL for the entire texture
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">const</span> SDL_Rect<span style="color:#f92672">*</span> dstrect); <span style="color:#75715e">// the destination SDL_Rect structure 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                          <span style="color:#75715e">// or NULL for the entire rendering target
+</span></span></span></code></pre></div><p>In our case we can pass the label texture, srcrect as NULL, and pass the label rect on the dstrect.</p>
+<h2 id="events-and-user-inputs">Events and User Inputs<a hidden class="anchor" aria-hidden="true" href="#events-and-user-inputs">#</a></h2>
+<p>Again, we will have a function for processing events.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">process_events</span>(Game<span style="color:#f92672">*</span> game, SDL_Event<span style="color:#f92672">*</span> event);
+</span></span></code></pre></div><p>Inside this function if the game state is <em>GAME_STATE_PRESS_TO_PLAY</em> then
+we check if the space key is pressed. Once pressed we then change the game state
+to <em>GAME_STATE_PLAYING</em> and make the ball to start moving by adding it speed.</p>
+<p>On <em>GAME_STATE_PLAYING</em> we add speed to the paddle when either the left or right key
+is pressed. Then upon release we set the speed of the paddle to 0 again.</p>
+<h2 id="update-function">Update Function<a hidden class="anchor" aria-hidden="true" href="#update-function">#</a></h2>
+<p>This is where most of the game logic is.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(Game<span style="color:#f92672">*</span> game);
+</span></span></code></pre></div><p>Below is a summary of what the function is doing</p>
+<p><em>Paddle</em></p>
+<ul>
+<li>Updates the position of the paddle based on its current speed.</li>
+</ul>
+<p><em>Ball</em></p>
+<ul>
+<li>Updates the position of the ball based on its current speed.</li>
+<li>Check for collisions.</li>
+<li>Change direction if there&rsquo;s a collision.</li>
+<li>If it collided to a block, then set block.alive = false and increment the score.</li>
+</ul>
+<p><em>Check for lose and victory conditions</em></p>
+<ul>
+<li>If all blocks are cleared the player wins.</li>
+<li>If ball falls below the screen the player loses.</li>
+</ul>
+<p>As for detecting collision first we will create a helper function to get the position
+of the side of the <em>Block</em> struct that we want to check.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// returns a float value representing the selected side of
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// the given block.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">float</span> <span style="color:#a6e22e">block_get_side</span>(Block<span style="color:#f92672">*</span> block, BlockSide side)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span>(side)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> BLOCKSIDE_TOP:
+</span></span><span style="display:flex;"><span>            value <span style="color:#f92672">=</span> block<span style="color:#f92672">-&gt;</span>rect.y;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> BLOCKSIDE_RIGHT:
+</span></span><span style="display:flex;"><span>            value <span style="color:#f92672">=</span> block<span style="color:#f92672">-&gt;</span>rect.x <span style="color:#f92672">+</span> block<span style="color:#f92672">-&gt;</span>rect.w;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> BLOCKSIDE_BOTTOM:
+</span></span><span style="display:flex;"><span>            value <span style="color:#f92672">=</span> block<span style="color:#f92672">-&gt;</span>rect.y <span style="color:#f92672">+</span> block<span style="color:#f92672">-&gt;</span>rect.h;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> BLOCKSIDE_LEFT:
+</span></span><span style="display:flex;"><span>            value <span style="color:#f92672">=</span> block<span style="color:#f92672">-&gt;</span>rect.x;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> value;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Below is the code to check for the actual collision. The idea is to check
+if there is an overlap between the two and if there is return true, otherwise false.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// returns true if a collision is detected
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// between given blocks.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">has_ball_collided_to</span>(Block<span style="color:#f92672">*</span> ball, Block<span style="color:#f92672">*</span> block)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> bottom_hit_top <span style="color:#f92672">=</span> block_get_side(ball, BLOCKSIDE_BOTTOM) <span style="color:#f92672">&gt;</span> block_get_side(block, BLOCKSIDE_TOP)
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&amp;&amp;</span> block_get_side(ball, BLOCKSIDE_BOTTOM) <span style="color:#f92672">&lt;</span> block_get_side(block, BLOCKSIDE_BOTTOM);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> top_hit_bottom <span style="color:#f92672">=</span> block_get_side(ball, BLOCKSIDE_TOP) <span style="color:#f92672">&lt;</span> block_get_side(block, BLOCKSIDE_BOTTOM)
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&amp;&amp;</span> block_get_side(ball, BLOCKSIDE_TOP) <span style="color:#f92672">&gt;</span> block_get_side(block, BLOCKSIDE_TOP);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> right_within_width <span style="color:#f92672">=</span> block_get_side(ball, BLOCKSIDE_RIGHT) <span style="color:#f92672">&gt;</span> block_get_side(block, BLOCKSIDE_LEFT)
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&amp;&amp;</span> block_get_side(ball, BLOCKSIDE_RIGHT) <span style="color:#f92672">&lt;</span> block_get_side(block, BLOCKSIDE_RIGHT);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> left_within_width <span style="color:#f92672">=</span> block_get_side(ball, BLOCKSIDE_LEFT) <span style="color:#f92672">&lt;</span> block_get_side(block, BLOCKSIDE_RIGHT)
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&amp;&amp;</span> block_get_side(ball, BLOCKSIDE_LEFT) <span style="color:#f92672">&gt;</span> block_get_side(block, BLOCKSIDE_LEFT);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (bottom_hit_top <span style="color:#f92672">||</span> top_hit_bottom) <span style="color:#f92672">&amp;&amp;</span> (right_within_width <span style="color:#f92672">||</span> left_within_width);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="game-over-and-victory">Game Over and Victory<a hidden class="anchor" aria-hidden="true" href="#game-over-and-victory">#</a></h2>
+<p>For this tutorial we handle victory and lose conditions by restarting the game.
+To do that we simply call the initialize function again.</p>
+<h2 id="breakout">Breakout<a hidden class="anchor" aria-hidden="true" href="#breakout">#</a></h2>
+<p>Below is the complete code for our breakout game.</p>
+<p>main.c</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdbool.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;SDL2/SDL.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;SDL2/SDL_ttf.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// represents the game state.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> GameState {
+</span></span><span style="display:flex;"><span>    GAME_STATE_PRESS_TO_PLAY,
+</span></span><span style="display:flex;"><span>    GAME_STATE_PLAYING
+</span></span><span style="display:flex;"><span>} GameState;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// enum to represent each side of a Block.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> BlockSide {
+</span></span><span style="display:flex;"><span>    BLOCKSIDE_TOP,
+</span></span><span style="display:flex;"><span>    BLOCKSIDE_RIGHT,
+</span></span><span style="display:flex;"><span>    BLOCKSIDE_BOTTOM,
+</span></span><span style="display:flex;"><span>    BLOCKSIDE_LEFT
+</span></span><span style="display:flex;"><span>} BlockSide;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Struct for ball, paddle and breakable blocks.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> Block {
+</span></span><span style="display:flex;"><span>    SDL_FRect rect; <span style="color:#75715e">// position, width and height
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">float</span> speed_x;  <span style="color:#75715e">// current speed in x-axis
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">float</span> speed_y;  <span style="color:#75715e">// current speed in y-axis
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint8_t</span> r;      <span style="color:#75715e">// red value 0 - 255
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint8_t</span> g;      <span style="color:#75715e">// green value 0 -255
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint8_t</span> b;      <span style="color:#75715e">// blue value 0 - 255
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">uint8_t</span> a;      <span style="color:#75715e">// alpha value 0 - 255
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> is_alive;  <span style="color:#75715e">// determines if block should be processed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} Block;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Holds texture, position, and dimension
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// data for text display 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> Label {
+</span></span><span style="display:flex;"><span>    SDL_Texture<span style="color:#f92672">*</span> texture; <span style="color:#75715e">// holds texture created from SDL_ttf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SDL_Rect rect;        <span style="color:#75715e">// position, width, and height
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} Label;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// struct to hold in-game data.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> Game {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> title[<span style="color:#ae81ff">32</span>];            <span style="color:#75715e">// window title
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> window_width;          <span style="color:#75715e">// width of the window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> window_height;         <span style="color:#75715e">// height of the window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> is_running;           <span style="color:#75715e">// game loop status
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SDL_Window<span style="color:#f92672">*</span> window;        <span style="color:#75715e">// window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SDL_Renderer<span style="color:#f92672">*</span> renderer;    <span style="color:#75715e">// renderer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Block paddle;              <span style="color:#75715e">// Paddle that the player controls
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Block ball;                <span style="color:#75715e">// Ball
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Block blocks[<span style="color:#ae81ff">32</span>];          <span style="color:#75715e">// Breakable blocks 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> no_of_blocks;          <span style="color:#75715e">// number of breakable blocks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> score;                 <span style="color:#75715e">// player&#39;s score
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Label<span style="color:#f92672">*</span> lbl_score;          <span style="color:#75715e">// in-game text 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Label<span style="color:#f92672">*</span> lbl_score_value;    <span style="color:#75715e">// in-game text representing the current score
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Label<span style="color:#f92672">*</span> lbl_press_to_start; <span style="color:#75715e">// in-game text 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">float</span> speed_ball;          <span style="color:#75715e">// ball&#39;s move speed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">float</span> speed_paddle;        <span style="color:#75715e">// paddle&#39;s move speed
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    GameState state;           <span style="color:#75715e">// current game state
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} Game;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// function prototypes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">initialize</span>(Game<span style="color:#f92672">*</span> game);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">process_events</span>(Game<span style="color:#f92672">*</span> game, SDL_Event<span style="color:#f92672">*</span> event);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(Game<span style="color:#f92672">*</span> game);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">draw</span>(Game<span style="color:#f92672">*</span> game);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">draw_block</span>(Block<span style="color:#f92672">*</span> block, SDL_Renderer<span style="color:#f92672">*</span> renderer);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> <span style="color:#a6e22e">block_get_side</span>(Block<span style="color:#f92672">*</span> block, BlockSide side);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">has_ball_collided_to</span>(Block<span style="color:#f92672">*</span> ball, Block<span style="color:#f92672">*</span> block);
+</span></span><span style="display:flex;"><span>Label<span style="color:#f92672">*</span> <span style="color:#a6e22e">label_create</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> str, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> font_path, <span style="color:#66d9ef">int</span> size, SDL_Renderer<span style="color:#f92672">*</span> renderer);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">label_destroy</span>(Label<span style="color:#f92672">*</span> label);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">**</span> args)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// FPS cap
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> fps_cap <span style="color:#f92672">=</span> <span style="color:#ae81ff">60.0f</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> fps_cap_in_ms <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000.0f</span><span style="color:#f92672">/</span>fps_cap;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint64_t</span> start;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint64_t</span> end;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> delta; 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// initialize SDL libraries
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SDL_Init(SDL_INIT_EVERYTHING);
+</span></span><span style="display:flex;"><span>    TTF_Init();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// initialize game data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Game game <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>    initialize(<span style="color:#f92672">&amp;</span>game); 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// background rect
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SDL_Rect bg_rect <span style="color:#f92672">=</span> { 
+</span></span><span style="display:flex;"><span>        .x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, 
+</span></span><span style="display:flex;"><span>        .y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, 
+</span></span><span style="display:flex;"><span>        .w <span style="color:#f92672">=</span> game.window_width, 
+</span></span><span style="display:flex;"><span>        .h <span style="color:#f92672">=</span> game.window_height 
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// game loop
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span>(game.is_running)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        start <span style="color:#f92672">=</span> SDL_GetPerformanceCounter();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// process events
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        SDL_Event event;
+</span></span><span style="display:flex;"><span>        process_events(<span style="color:#f92672">&amp;</span>game, <span style="color:#f92672">&amp;</span>event);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// update game
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        update(<span style="color:#f92672">&amp;</span>game);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// clear screen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        SDL_SetRenderDrawColor(game.renderer, <span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">255</span>);
+</span></span><span style="display:flex;"><span>        SDL_RenderClear(game.renderer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// draw background rect
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        SDL_SetRenderDrawColor(game.renderer, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">255</span>);
+</span></span><span style="display:flex;"><span>        SDL_RenderFillRect(game.renderer, <span style="color:#f92672">&amp;</span>bg_rect);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// draw game objects
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        draw(<span style="color:#f92672">&amp;</span>game);
+</span></span><span style="display:flex;"><span>       
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// render drawing operations to screen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        SDL_RenderPresent(game.renderer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        end <span style="color:#f92672">=</span> SDL_GetPerformanceCounter();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// cap fps
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        delta <span style="color:#f92672">=</span> (end <span style="color:#f92672">-</span> start)<span style="color:#f92672">/</span>(<span style="color:#66d9ef">float</span>) SDL_GetPerformanceFrequency() <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000.0f</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(delta <span style="color:#f92672">&lt;</span> fps_cap_in_ms)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            SDL_Delay(fps_cap_in_ms <span style="color:#f92672">-</span> delta);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Free allocated resources
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(game.lbl_score_value) label_destroy(game.lbl_score_value);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(game.lbl_score) label_destroy(game.lbl_score);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(game.lbl_press_to_start) label_destroy(game.lbl_press_to_start);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    SDL_DestroyRenderer(game.renderer);
+</span></span><span style="display:flex;"><span>    SDL_DestroyWindow(game.window);
+</span></span><span style="display:flex;"><span>    TTF_Quit();
+</span></span><span style="display:flex;"><span>    SDL_Quit();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> EXIT_SUCCESS;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets the initial values of the game data.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">initialize</span>(Game<span style="color:#f92672">*</span> game)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// window data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    strcpy(game<span style="color:#f92672">-&gt;</span>title, <span style="color:#e6db74">&#34;SDL Breakout&#34;</span>);
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>window_width <span style="color:#f92672">=</span> <span style="color:#ae81ff">640</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>window_height <span style="color:#f92672">=</span> <span style="color:#ae81ff">360</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// create window
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(NULL <span style="color:#f92672">==</span> game<span style="color:#f92672">-&gt;</span>window)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>window <span style="color:#f92672">=</span> SDL_CreateWindow(
+</span></span><span style="display:flex;"><span>            game<span style="color:#f92672">-&gt;</span>title,
+</span></span><span style="display:flex;"><span>            SDL_WINDOWPOS_CENTERED,
+</span></span><span style="display:flex;"><span>            SDL_WINDOWPOS_CENTERED,
+</span></span><span style="display:flex;"><span>            game<span style="color:#f92672">-&gt;</span>window_width,
+</span></span><span style="display:flex;"><span>            game<span style="color:#f92672">-&gt;</span>window_height,
+</span></span><span style="display:flex;"><span>            SDL_WINDOW_RESIZABLE
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// create renderer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(NULL <span style="color:#f92672">==</span> game<span style="color:#f92672">-&gt;</span>renderer)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>renderer <span style="color:#f92672">=</span> SDL_CreateRenderer(game<span style="color:#f92672">-&gt;</span>window, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, SDL_RENDERER_ACCELERATED<span style="color:#f92672">|</span> SDL_RENDERER_PRESENTVSYNC);
+</span></span><span style="display:flex;"><span>        SDL_RenderSetLogicalSize(game<span style="color:#f92672">-&gt;</span>renderer, game<span style="color:#f92672">-&gt;</span>window_width, game<span style="color:#f92672">-&gt;</span>window_height);
+</span></span><span style="display:flex;"><span>    }    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// game loop state
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    game<span style="color:#f92672">-&gt;</span>is_running <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// game vars
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    game<span style="color:#f92672">-&gt;</span>state <span style="color:#f92672">=</span> GAME_STATE_PRESS_TO_PLAY;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>speed_ball <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.0f</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>speed_paddle <span style="color:#f92672">=</span> <span style="color:#ae81ff">5.0f</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>score <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(game<span style="color:#f92672">-&gt;</span>lbl_score_value)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        label_destroy(game<span style="color:#f92672">-&gt;</span>lbl_score_value);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>lbl_score_value <span style="color:#f92672">=</span> label_create(<span style="color:#e6db74">&#34;0&#34;</span>, <span style="color:#e6db74">&#34;./OpenSans-Bold.ttf&#34;</span>, <span style="color:#ae81ff">32</span>, game<span style="color:#f92672">-&gt;</span>renderer);
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.w<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.y <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.h<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(game<span style="color:#f92672">-&gt;</span>lbl_score)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        label_destroy(game<span style="color:#f92672">-&gt;</span>lbl_score);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>lbl_score <span style="color:#f92672">=</span> label_create(<span style="color:#e6db74">&#34;SCORE&#34;</span>, <span style="color:#e6db74">&#34;./OpenSans-Bold.ttf&#34;</span>, <span style="color:#ae81ff">16</span>, game<span style="color:#f92672">-&gt;</span>renderer);
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>lbl_score<span style="color:#f92672">-&gt;</span>rect.x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>lbl_score<span style="color:#f92672">-&gt;</span>rect.w<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>lbl_score<span style="color:#f92672">-&gt;</span>rect.y <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.y <span style="color:#f92672">+</span> game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.h <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(game<span style="color:#f92672">-&gt;</span>lbl_press_to_start)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        label_destroy(game<span style="color:#f92672">-&gt;</span>lbl_press_to_start);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>lbl_press_to_start <span style="color:#f92672">=</span> label_create(<span style="color:#e6db74">&#34;Press [SPACE] to play.&#34;</span>, <span style="color:#e6db74">&#34;./OpenSans-Bold.ttf&#34;</span>, <span style="color:#ae81ff">16</span>, game<span style="color:#f92672">-&gt;</span>renderer);
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>lbl_press_to_start<span style="color:#f92672">-&gt;</span>rect.x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>lbl_press_to_start<span style="color:#f92672">-&gt;</span>rect.w<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>lbl_press_to_start<span style="color:#f92672">-&gt;</span>rect.y <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.y <span style="color:#f92672">+</span> game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.h <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// initialize paddle
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    game<span style="color:#f92672">-&gt;</span>paddle.rect.w <span style="color:#f92672">=</span> <span style="color:#ae81ff">64.0f</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>paddle.rect.h <span style="color:#f92672">=</span> <span style="color:#ae81ff">16.0f</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>paddle.rect.x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>paddle.rect.w<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>paddle.rect.y <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_height <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>paddle.rect.h <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>paddle.is_alive <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>paddle.r <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>paddle.g <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>paddle.b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>paddle.a <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>paddle.speed_x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>paddle.speed_y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// initialize ball
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    game<span style="color:#f92672">-&gt;</span>ball.rect.w <span style="color:#f92672">=</span> <span style="color:#ae81ff">16.0f</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>ball.rect.h <span style="color:#f92672">=</span> <span style="color:#ae81ff">16.0f</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>ball.rect.x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>ball.rect.w<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>ball.rect.y <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>paddle.rect.y <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>ball.rect.h <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>ball.is_alive <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>ball.r <span style="color:#f92672">=</span> <span style="color:#ae81ff">150</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>ball.g <span style="color:#f92672">=</span> <span style="color:#ae81ff">150</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>ball.b <span style="color:#f92672">=</span> <span style="color:#ae81ff">150</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>ball.a <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>ball.speed_x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>    game<span style="color:#f92672">-&gt;</span>ball.speed_y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// initialize breakable blocks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    game<span style="color:#f92672">-&gt;</span>no_of_blocks <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(game<span style="color:#f92672">-&gt;</span>blocks)<span style="color:#f92672">/</span><span style="color:#66d9ef">sizeof</span>(Block);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> padding <span style="color:#f92672">=</span> <span style="color:#ae81ff">8.0f</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> no_of_blocks_per_row <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> offset_x <span style="color:#f92672">=</span> <span style="color:#ae81ff">32.0f</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> offset_y <span style="color:#f92672">=</span> <span style="color:#ae81ff">16.0f</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> row <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> col <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; index <span style="color:#f92672">&lt;</span> game<span style="color:#f92672">-&gt;</span>no_of_blocks; index<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {   
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].rect.w <span style="color:#f92672">=</span> <span style="color:#ae81ff">64.0f</span>;
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].rect.h <span style="color:#f92672">=</span> <span style="color:#ae81ff">16.0f</span>;
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].rect.x <span style="color:#f92672">=</span> offset_x <span style="color:#f92672">+</span> (padding <span style="color:#f92672">+</span> game<span style="color:#f92672">-&gt;</span>blocks[index].rect.w) <span style="color:#f92672">*</span> col;
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].rect.y <span style="color:#f92672">=</span> offset_y <span style="color:#f92672">+</span> (padding <span style="color:#f92672">+</span> game<span style="color:#f92672">-&gt;</span>blocks[index].rect.h) <span style="color:#f92672">*</span> row;
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].is_alive <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].r <span style="color:#f92672">=</span> rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">200</span>;
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].g <span style="color:#f92672">=</span> rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">200</span>;
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].b <span style="color:#f92672">=</span> rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">200</span>;
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].a <span style="color:#f92672">=</span> <span style="color:#ae81ff">255</span>;
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].speed_x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>        game<span style="color:#f92672">-&gt;</span>blocks[index].speed_y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        col<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(col <span style="color:#f92672">==</span> no_of_blocks_per_row)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            col <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            row<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Process events and user inputs.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">process_events</span>(Game<span style="color:#f92672">*</span> game, SDL_Event<span style="color:#f92672">*</span> event)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(SDL_PollEvent(event))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(SDL_QUIT <span style="color:#f92672">==</span> event<span style="color:#f92672">-&gt;</span>type)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            game<span style="color:#f92672">-&gt;</span>is_running <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">switch</span>(game<span style="color:#f92672">-&gt;</span>state)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> GAME_STATE_PRESS_TO_PLAY:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(SDL_KEYDOWN <span style="color:#f92672">==</span> event<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">&amp;&amp;</span> SDLK_SPACE <span style="color:#f92672">==</span> event<span style="color:#f92672">-&gt;</span>key.keysym.sym)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    game<span style="color:#f92672">-&gt;</span>ball.speed_x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>speed_ball;
+</span></span><span style="display:flex;"><span>                    game<span style="color:#f92672">-&gt;</span>ball.speed_y <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>game<span style="color:#f92672">-&gt;</span>speed_ball;
+</span></span><span style="display:flex;"><span>                    game<span style="color:#f92672">-&gt;</span>state <span style="color:#f92672">=</span> GAME_STATE_PLAYING;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">case</span> GAME_STATE_PLAYING:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(SDL_KEYDOWN <span style="color:#f92672">==</span> event<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">&amp;&amp;</span> SDLK_LEFT <span style="color:#f92672">==</span> event<span style="color:#f92672">-&gt;</span>key.keysym.sym)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    game<span style="color:#f92672">-&gt;</span>paddle.speed_x <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>game<span style="color:#f92672">-&gt;</span>speed_paddle;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(SDL_KEYDOWN <span style="color:#f92672">==</span> event<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">&amp;&amp;</span> SDLK_RIGHT <span style="color:#f92672">==</span> event<span style="color:#f92672">-&gt;</span>key.keysym.sym)
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    game<span style="color:#f92672">-&gt;</span>paddle.speed_x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>speed_paddle;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(SDL_KEYUP <span style="color:#f92672">==</span> event<span style="color:#f92672">-&gt;</span>type <span style="color:#f92672">&amp;&amp;</span> 
+</span></span><span style="display:flex;"><span>                    (SDLK_RIGHT <span style="color:#f92672">==</span> event<span style="color:#f92672">-&gt;</span>key.keysym.sym <span style="color:#f92672">||</span> SDLK_LEFT <span style="color:#f92672">==</span> event<span style="color:#f92672">-&gt;</span>key.keysym.sym))
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    game<span style="color:#f92672">-&gt;</span>paddle.speed_x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Updates game data.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">update</span>(Game<span style="color:#f92672">*</span> game)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span>(game<span style="color:#f92672">-&gt;</span>state)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> GAME_STATE_PRESS_TO_PLAY:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> GAME_STATE_PLAYING:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// update paddle
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#75715e">// movement
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            game<span style="color:#f92672">-&gt;</span>paddle.rect.x <span style="color:#f92672">+=</span> game<span style="color:#f92672">-&gt;</span>paddle.speed_x;
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// set bounds
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(block_get_side(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>paddle), BLOCKSIDE_LEFT) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                game<span style="color:#f92672">-&gt;</span>paddle.rect.x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(block_get_side(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>paddle), BLOCKSIDE_RIGHT) <span style="color:#f92672">&gt;</span> game<span style="color:#f92672">-&gt;</span>window_width)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                game<span style="color:#f92672">-&gt;</span>paddle.rect.x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_width <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>paddle.rect.w;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// update ball
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#75715e">// movement
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            game<span style="color:#f92672">-&gt;</span>ball.rect.x <span style="color:#f92672">+=</span> game<span style="color:#f92672">-&gt;</span>ball.speed_x;
+</span></span><span style="display:flex;"><span>            game<span style="color:#f92672">-&gt;</span>ball.rect.y <span style="color:#f92672">+=</span> game<span style="color:#f92672">-&gt;</span>ball.speed_y;
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// check wall and ceiling collision
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(block_get_side(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>ball), BLOCKSIDE_LEFT) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                game<span style="color:#f92672">-&gt;</span>ball.rect.x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>                game<span style="color:#f92672">-&gt;</span>ball.speed_x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>ball.speed_x <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(block_get_side(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>ball), BLOCKSIDE_RIGHT) <span style="color:#f92672">&gt;</span> game<span style="color:#f92672">-&gt;</span>window_width)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                game<span style="color:#f92672">-&gt;</span>ball.rect.x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_width <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>ball.rect.w;
+</span></span><span style="display:flex;"><span>                game<span style="color:#f92672">-&gt;</span>ball.speed_x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>ball.speed_x <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(block_get_side(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>ball), BLOCKSIDE_TOP) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                game<span style="color:#f92672">-&gt;</span>ball.rect.y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>                game<span style="color:#f92672">-&gt;</span>ball.speed_y <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>ball.speed_y <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// check out of bounds
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(block_get_side(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>ball), BLOCKSIDE_BOTTOM) <span style="color:#f92672">&gt;</span> game<span style="color:#f92672">-&gt;</span>window_height)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// restart game
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                initialize(game);
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// check paddle collision
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(has_ball_collided_to(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>ball), <span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>paddle)))   
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                game<span style="color:#f92672">-&gt;</span>ball.rect.y <span style="color:#f92672">=</span> block_get_side(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>paddle), BLOCKSIDE_TOP) <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>ball.rect.h;
+</span></span><span style="display:flex;"><span>                game<span style="color:#f92672">-&gt;</span>ball.speed_y <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>ball.speed_y <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// check block collision
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; index <span style="color:#f92672">&lt;</span> game<span style="color:#f92672">-&gt;</span>no_of_blocks; index<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>game<span style="color:#f92672">-&gt;</span>blocks[index].is_alive) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(has_ball_collided_to(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>ball), <span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>blocks[index])))
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// kill block
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    game<span style="color:#f92672">-&gt;</span>blocks[index].is_alive <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// update score
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    game<span style="color:#f92672">-&gt;</span>score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">char</span> buff[<span style="color:#ae81ff">32</span>];
+</span></span><span style="display:flex;"><span>                    sprintf(buff, <span style="color:#e6db74">&#34;%d&#34;</span>, game<span style="color:#f92672">-&gt;</span>score);
+</span></span><span style="display:flex;"><span>                    label_destroy(game<span style="color:#f92672">-&gt;</span>lbl_score_value);
+</span></span><span style="display:flex;"><span>                    game<span style="color:#f92672">-&gt;</span>lbl_score_value <span style="color:#f92672">=</span> label_create(buff, <span style="color:#e6db74">&#34;./OpenSans-Bold.ttf&#34;</span>, <span style="color:#ae81ff">32</span>, game<span style="color:#f92672">-&gt;</span>renderer);
+</span></span><span style="display:flex;"><span>                    game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.x <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_width<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.w<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>                    game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.y <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>window_height<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect.h<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// bounce
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    game<span style="color:#f92672">-&gt;</span>ball.speed_y <span style="color:#f92672">=</span> game<span style="color:#f92672">-&gt;</span>ball.speed_y <span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(game<span style="color:#f92672">-&gt;</span>score <span style="color:#f92672">==</span> game<span style="color:#f92672">-&gt;</span>no_of_blocks)
+</span></span><span style="display:flex;"><span>                    {
+</span></span><span style="display:flex;"><span>                        <span style="color:#75715e">// no more blocks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                        <span style="color:#75715e">// restart game
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                        initialize(game);
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Render game data to screen.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">draw</span>(Game<span style="color:#f92672">*</span> game)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// draw labels
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">switch</span>(game<span style="color:#f92672">-&gt;</span>state)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> GAME_STATE_PRESS_TO_PLAY:
+</span></span><span style="display:flex;"><span>            SDL_RenderCopy(game<span style="color:#f92672">-&gt;</span>renderer, game<span style="color:#f92672">-&gt;</span>lbl_press_to_start<span style="color:#f92672">-&gt;</span>texture, NULL, <span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>lbl_press_to_start<span style="color:#f92672">-&gt;</span>rect));
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> GAME_STATE_PLAYING:
+</span></span><span style="display:flex;"><span>            SDL_RenderCopy(game<span style="color:#f92672">-&gt;</span>renderer, game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>texture, NULL, <span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>lbl_score_value<span style="color:#f92672">-&gt;</span>rect));
+</span></span><span style="display:flex;"><span>            SDL_RenderCopy(game<span style="color:#f92672">-&gt;</span>renderer, game<span style="color:#f92672">-&gt;</span>lbl_score<span style="color:#f92672">-&gt;</span>texture, NULL, <span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>lbl_score<span style="color:#f92672">-&gt;</span>rect));
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// draw blocks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; index <span style="color:#f92672">&lt;</span> game<span style="color:#f92672">-&gt;</span>no_of_blocks; index<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(game<span style="color:#f92672">-&gt;</span>blocks[index].is_alive)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            draw_block(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>blocks[index]), game<span style="color:#f92672">-&gt;</span>renderer);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// draw ball
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    draw_block(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>ball), game<span style="color:#f92672">-&gt;</span>renderer);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// draw paddle
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    draw_block(<span style="color:#f92672">&amp;</span>(game<span style="color:#f92672">-&gt;</span>paddle), game<span style="color:#f92672">-&gt;</span>renderer);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">draw_block</span>(Block<span style="color:#f92672">*</span> block, SDL_Renderer<span style="color:#f92672">*</span> renderer)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    SDL_SetRenderDrawColor(renderer, block<span style="color:#f92672">-&gt;</span>r, block<span style="color:#f92672">-&gt;</span>g, block<span style="color:#f92672">-&gt;</span>b, block<span style="color:#f92672">-&gt;</span>a);
+</span></span><span style="display:flex;"><span>    SDL_RenderFillRectF(renderer, <span style="color:#f92672">&amp;</span>(block<span style="color:#f92672">-&gt;</span>rect));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// returns a float value representing the selected side of
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// the given block.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">float</span> <span style="color:#a6e22e">block_get_side</span>(Block<span style="color:#f92672">*</span> block, BlockSide side)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> value <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span>(side)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> BLOCKSIDE_TOP:
+</span></span><span style="display:flex;"><span>            value <span style="color:#f92672">=</span> block<span style="color:#f92672">-&gt;</span>rect.y;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> BLOCKSIDE_RIGHT:
+</span></span><span style="display:flex;"><span>            value <span style="color:#f92672">=</span> block<span style="color:#f92672">-&gt;</span>rect.x <span style="color:#f92672">+</span> block<span style="color:#f92672">-&gt;</span>rect.w;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> BLOCKSIDE_BOTTOM:
+</span></span><span style="display:flex;"><span>            value <span style="color:#f92672">=</span> block<span style="color:#f92672">-&gt;</span>rect.y <span style="color:#f92672">+</span> block<span style="color:#f92672">-&gt;</span>rect.h;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> BLOCKSIDE_LEFT:
+</span></span><span style="display:flex;"><span>            value <span style="color:#f92672">=</span> block<span style="color:#f92672">-&gt;</span>rect.x;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> value;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// returns true if a collision is detected
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// between given blocks.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">has_ball_collided_to</span>(Block<span style="color:#f92672">*</span> ball, Block<span style="color:#f92672">*</span> block)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> bottom_hit_top <span style="color:#f92672">=</span> block_get_side(ball, BLOCKSIDE_BOTTOM) <span style="color:#f92672">&gt;</span> block_get_side(block, BLOCKSIDE_TOP)
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&amp;&amp;</span> block_get_side(ball, BLOCKSIDE_BOTTOM) <span style="color:#f92672">&lt;</span> block_get_side(block, BLOCKSIDE_BOTTOM);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> top_hit_bottom <span style="color:#f92672">=</span> block_get_side(ball, BLOCKSIDE_TOP) <span style="color:#f92672">&lt;</span> block_get_side(block, BLOCKSIDE_BOTTOM)
+</span></span><span style="display:flex;"><span>                        <span style="color:#f92672">&amp;&amp;</span> block_get_side(ball, BLOCKSIDE_TOP) <span style="color:#f92672">&gt;</span> block_get_side(block, BLOCKSIDE_TOP);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> right_within_width <span style="color:#f92672">=</span> block_get_side(ball, BLOCKSIDE_RIGHT) <span style="color:#f92672">&gt;</span> block_get_side(block, BLOCKSIDE_LEFT)
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&amp;&amp;</span> block_get_side(ball, BLOCKSIDE_RIGHT) <span style="color:#f92672">&lt;</span> block_get_side(block, BLOCKSIDE_RIGHT);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> left_within_width <span style="color:#f92672">=</span> block_get_side(ball, BLOCKSIDE_LEFT) <span style="color:#f92672">&lt;</span> block_get_side(block, BLOCKSIDE_RIGHT)
+</span></span><span style="display:flex;"><span>                            <span style="color:#f92672">&amp;&amp;</span> block_get_side(ball, BLOCKSIDE_LEFT) <span style="color:#f92672">&gt;</span> block_get_side(block, BLOCKSIDE_LEFT);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (bottom_hit_top <span style="color:#f92672">||</span> top_hit_bottom) <span style="color:#f92672">&amp;&amp;</span> (right_within_width <span style="color:#f92672">||</span> left_within_width);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Creates a Label instance
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Label<span style="color:#f92672">*</span> <span style="color:#a6e22e">label_create</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> str, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> font_path, <span style="color:#66d9ef">int</span> size, SDL_Renderer<span style="color:#f92672">*</span> renderer)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Label<span style="color:#f92672">*</span> label <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(Label));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    TTF_Font<span style="color:#f92672">*</span> font <span style="color:#f92672">=</span> TTF_OpenFont(font_path, size);
+</span></span><span style="display:flex;"><span>    SDL_Surface<span style="color:#f92672">*</span> surface <span style="color:#f92672">=</span> TTF_RenderText_Solid(font, str, (SDL_Color){ <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span> });
+</span></span><span style="display:flex;"><span>    label<span style="color:#f92672">-&gt;</span>texture <span style="color:#f92672">=</span> SDL_CreateTextureFromSurface(renderer, surface);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    label<span style="color:#f92672">-&gt;</span>rect.x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    label<span style="color:#f92672">-&gt;</span>rect.y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    SDL_QueryTexture(label<span style="color:#f92672">-&gt;</span>texture, NULL, NULL, <span style="color:#f92672">&amp;</span>(label<span style="color:#f92672">-&gt;</span>rect.w), <span style="color:#f92672">&amp;</span>(label<span style="color:#f92672">-&gt;</span>rect.h));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    SDL_FreeSurface(surface);
+</span></span><span style="display:flex;"><span>    TTF_CloseFont(font);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> label;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Free Label instance along with its resources
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">label_destroy</span>(Label<span style="color:#f92672">*</span> label)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(NULL <span style="color:#f92672">==</span> label) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(label<span style="color:#f92672">-&gt;</span>texture)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        SDL_DestroyTexture(label<span style="color:#f92672">-&gt;</span>texture);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    free(label);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="compiling">Compiling<a hidden class="anchor" aria-hidden="true" href="#compiling">#</a></h2>
+<p>On Windows using mingw:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gcc main.c -o game -lmingw32 -lSDL2main -lSDL2 -lSDL2_ttf -mwindows
+</span></span></code></pre></div><p>With pkg-config:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>gcc <span style="color:#e6db74">`</span>pkg-config sdl2 --cflags<span style="color:#e6db74">`</span> main.c -o game <span style="color:#e6db74">`</span>pkg-config sdl2 --libs<span style="color:#e6db74">`</span> -lSDL2_ttf
+</span></span></code></pre></div><h2 id="output">Output<a hidden class="anchor" aria-hidden="true" href="#output">#</a></h2>
+<p><img loading="lazy" src="/sdl-breakout.png" alt="SDL Breakout"  title="SDL Breakout"  />
+</p>
+<hr>
+<p>Thank you for reading!</p>
+<p>Like this post? <a href="https://ko-fi.com/K3K7CIMN0"><img loading="lazy" src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi"  />
+</a></p>
+<p><a href="https://twitter.com/kebino11_">Follow</a> this blog on Twitter and stay updated!</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://www.mkbaltz.com/tags/c/">c</a></li>
+      <li><a href="https://www.mkbaltz.com/tags/programming/">programming</a></li>
+      <li><a href="https://www.mkbaltz.com/tags/sdl/">sdl</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://www.mkbaltz.com/posts/c-sdl-rendering-shapes/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>SDL2 Tutorial in C [02] - Rendering Shapes</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share SDL2 Tutorial in C [03] - Breakout on twitter"
+        href="https://twitter.com/intent/tweet/?text=SDL2%20Tutorial%20in%20C%20%5b03%5d%20-%20Breakout&amp;url=https%3a%2f%2fwww.mkbaltz.com%2fposts%2fc-sdl-breakout%2f&amp;hashtags=c%2cprogramming%2csdl">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share SDL2 Tutorial in C [03] - Breakout on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.mkbaltz.com%2fposts%2fc-sdl-breakout%2f&amp;title=SDL2%20Tutorial%20in%20C%20%5b03%5d%20-%20Breakout&amp;summary=SDL2%20Tutorial%20in%20C%20%5b03%5d%20-%20Breakout&amp;source=https%3a%2f%2fwww.mkbaltz.com%2fposts%2fc-sdl-breakout%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share SDL2 Tutorial in C [03] - Breakout on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fwww.mkbaltz.com%2fposts%2fc-sdl-breakout%2f&title=SDL2%20Tutorial%20in%20C%20%5b03%5d%20-%20Breakout">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share SDL2 Tutorial in C [03] - Breakout on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.mkbaltz.com%2fposts%2fc-sdl-breakout%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share SDL2 Tutorial in C [03] - Breakout on whatsapp"
+        href="https://api.whatsapp.com/send?text=SDL2%20Tutorial%20in%20C%20%5b03%5d%20-%20Breakout%20-%20https%3a%2f%2fwww.mkbaltz.com%2fposts%2fc-sdl-breakout%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share SDL2 Tutorial in C [03] - Breakout on telegram"
+        href="https://telegram.me/share/url?text=SDL2%20Tutorial%20in%20C%20%5b03%5d%20-%20Breakout&amp;url=https%3a%2f%2fwww.mkbaltz.com%2fposts%2fc-sdl-breakout%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://www.mkbaltz.com/">mkbaltz</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

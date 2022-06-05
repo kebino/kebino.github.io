@@ -6,7 +6,20 @@
     <description>Recent content in programming on mkbaltz</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 May 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Jun 2022 00:00:00 +0800</lastBuildDate><atom:link href="https://www.mkbaltz.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SDL2 Tutorial in C [03] - Breakout</title>
+      <link>https://www.mkbaltz.com/posts/c-sdl-breakout/</link>
+      <pubDate>Mon, 06 Jun 2022 00:00:00 +0800</pubDate>
+      
+      <guid>https://www.mkbaltz.com/posts/c-sdl-breakout/</guid>
+      <description>In this post we will use what we have learned previously to create a Breakout clone.
+Link to previous posts in the series:
+  SDL2 Tutorial in C [01] - Creating a Window, Renderer, and Setting an FPS Cap
+  SDL2 Tutorial in C [02] - Rendering Shapes
+  We will also learn how to display text and load fonts and for that we need to install the SDL2_ttf library.</description>
+    </item>
+    
     <item>
       <title>SDL2 Tutorial in C [02] - Rendering Shapes</title>
       <link>https://www.mkbaltz.com/posts/c-sdl-rendering-shapes/</link>

@@ -3,24 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.mkbaltz.com/tags/c/</loc>
-    <lastmod>2022-05-30T00:00:00+08:00</lastmod>
+    <lastmod>2022-06-06T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/</loc>
-    <lastmod>2022-05-30T00:00:00+08:00</lastmod>
+    <lastmod>2022-06-06T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/posts/</loc>
-    <lastmod>2022-05-30T00:00:00+08:00</lastmod>
+    <lastmod>2022-06-06T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/tags/programming/</loc>
-    <lastmod>2022-05-30T00:00:00+08:00</lastmod>
+    <lastmod>2022-06-06T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/tags/sdl/</loc>
-    <lastmod>2022-05-30T00:00:00+08:00</lastmod>
+    <lastmod>2022-06-06T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>https://www.mkbaltz.com/posts/c-sdl-rendering-shapes/</loc>
-    <lastmod>2022-05-30T00:00:00+08:00</lastmod>
+    <loc>https://www.mkbaltz.com/posts/c-sdl-breakout/</loc>
+    <lastmod>2022-06-06T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/tags/</loc>
+    <lastmod>2022-06-06T00:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://www.mkbaltz.com/posts/c-sdl-rendering-shapes/</loc>
     <lastmod>2022-05-30T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://www.mkbaltz.com/posts/c-sdl-how-to-create-a-window/</loc>
